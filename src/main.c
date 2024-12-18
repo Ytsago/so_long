@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2024/12/18 19:19:45 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/18 19:30:10 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,30 @@ int	input(int key, void *param)
 	ft_printf("%d, %d", data->player.pos_y, data->player.pos_x);
 	if (key == ESCAPE)
 		clean_exit(param);
-	if (key == W_KEY && map[data->player.pos_y + 1][data->player.pos_x] != '1')
+	if (key == W_KEY && map[data->player.pos_y - 1][data->player.pos_x] != '1')
+	{
+		data->player.pos_y -= 1;
 		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
 			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	}
 	if (key == D_KEY && map[data->player.pos_y][data->player.pos_x + 1] != '1')
+	{
+		data->player.pos_x += 1;
 		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
 			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	}
 	if (key == A_KEY && map[data->player.pos_y][data->player.pos_x - 1] != '1')
+	{
+		data->player.pos_x -= 1;
 		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
 			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
-	if (key == S_KEY && map[data->player.pos_y - 1][data->player.pos_x] != '1')
+	}
+	if (key == S_KEY && map[data->player.pos_y + 1][data->player.pos_x] != '1')
+	{
+		data->player.pos_y += 1;
 		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
 			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	}
 	return (1);
 }
 
