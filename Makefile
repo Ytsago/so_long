@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 LFLAGS = -lbsd -lX11 -lm -lXext
 CC = cc
 AR = ar
@@ -10,7 +10,7 @@ BLUE   = \033[34m
 RED    = \033[31m
 RESET  = \033[0m
 
-FILE =	main.c map_parsing.c
+FILE =	main.c check_map.c map_parsing.c pathing.c
 
 LIB_D = libft/
 

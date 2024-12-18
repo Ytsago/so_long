@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 14:16:13 by secros            #+#    #+#             */
-/*   Updated: 2024/12/10 14:31:34 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/17 11:21:43 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	free_the_mallocs(char **pt)
 	size_t	i;
 
 	i = 0;
+	if (!pt)
+		return ;
 	while (pt[i])
 		free(pt[i++]);
 	free(pt);

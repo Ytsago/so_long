@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2024/12/16 18:35:17 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/18 19:19:45 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,93 +16,95 @@
 
 void	clean_exit(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	mlx_destroy_image(data->mlx, data->sprite->img1);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	free_the_mallocs(data->map);
+	if (data->sprite.wall.img)
+		mlx_destroy_image(data->mlx, data->sprite.wall.img);
+	if (data->sprite.play.img)
+		mlx_destroy_image(data->mlx, data->sprite.play.img);
+	if (data->sprite.obj.img)
+		mlx_destroy_image(data->mlx, data->sprite.obj.img);
+	if (data->sprite.c_ex.img)
+		mlx_destroy_image(data->mlx, data->sprite.c_ex.img);
+	if (data->sprite.tile.img)
+		mlx_destroy_image(data->mlx, data->sprite.tile.img);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	exit (0);
 }
 
-void	data_init(t_data *data)
+void	load_asset(t_data *data)
 {
-	data->w_size[0] = DEFAULT_Y;
-	data->w_size[1] = DEFAULT_X;
-	data->pos[0] = 50;
-	data->pos[1] = 50;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, DEFAULT_X, DEFAULT_Y, "so long");
+	t_sprite	as;
+	int			x;
+	int			y;
+
+	x = 0;
+	y = 0;
+	as.wall.img = mlx_xpm_file_to_image(data->mlx, WALL, &x, &y);
+	as.play.img = mlx_xpm_file_to_image(data->mlx, PLAYER, &x, &y);
+	as.tile.img = mlx_xpm_file_to_image(data->mlx, TILE, &x, &y);
+	as.obj.img = mlx_xpm_file_to_image(data->mlx, OBJ, &x, &y);
+	as.c_ex.img = mlx_xpm_file_to_image(data->mlx, CEXIT, &x, &y);
+	data->sprite = as;
+ 	if (!as.c_ex.img || !as.obj.img || !as.play.img
+		|| !as.tile.img || !as.wall.img)
+	{
+		write (2, "failed to load asset\n", 21);
+		clean_exit(data);
+	}
 }
 
-void	move_player(t_data *data, int key)
+void	data_init(t_data *data)
 {
-	if (key == 119)
-	{
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img2, data->player.pos[0] , data->player.pos[1]);
-		data->player.pos[1] -= 32;
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img4, data->player.pos[0] , data->player.pos[1]);
-	}
-	else if (key == 97)
-	{	
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img2, data->player.pos[0] , data->player.pos[1]);
-		data->player.pos[0] -= 32;
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img4, data->player.pos[0] , data->player.pos[1]);
-	}
-	else if (key == 115)
-	{
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img2, data->player.pos[0] , data->player.pos[1]);
-		data->player.pos[1] += 32;
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img4, data->player.pos[0] , data->player.pos[1]);
-	}
-	else if (key == 100)
-	{
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img2, data->player.pos[0] , data->player.pos[1]);
-		data->player.pos[0] += 32;
-		mlx_put_image_to_window(data->mlx, data->win, data->sprite->img4, data->player.pos[0] , data->player.pos[1]);
-	}
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		exit(0);
+	data->win = mlx_new_window(data->mlx, DEFAULT_X, DEFAULT_Y, TITLE);
+	if (!data->win)
+		clean_exit(data);
+	load_asset(data);
 }
 
 int	input(int key, void *param)
 {
+	char 	**map;
 	t_data	*data;
 
 	data = param;
-
-	if (key == 65307)
-	{
-		mlx_loop_end(data->mlx);
+	map = data->map;
+	ft_printf("%d, %d", data->player.pos_y, data->player.pos_x);
+	if (key == ESCAPE)
 		clean_exit(param);
-	}
-	else
-		move_player(data, key);
+	if (key == W_KEY && map[data->player.pos_y + 1][data->player.pos_x] != '1')
+		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
+			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	if (key == D_KEY && map[data->player.pos_y][data->player.pos_x + 1] != '1')
+		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
+			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	if (key == A_KEY && map[data->player.pos_y][data->player.pos_x - 1] != '1')
+		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
+			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
+	if (key == S_KEY && map[data->player.pos_y - 1][data->player.pos_x] != '1')
+		mlx_put_image_to_window(data->mlx, data->win, data->sprite.tile.img,
+			(int)data->player.pos_x * 32, (int)data->player.pos_y * 32);
 	return (1);
 }
 
-int	quit(void *param)
-{
-	t_data	*data;
-
-	data = param;
-	mlx_loop_end(data->mlx);
-	clean_exit(param);
-	return (1);
-}
-
-int main ()
+int	main(int ac, char **av)
 {
 	t_data		data;
-	t_sprite	img;
+	int			x;
+	int			y;
 
-	int x = 0;
-	int y = 0;
+	x = 0;
+	y = 0;
+	if (ac != 2)
+		return (1);
+	if (map_parsing(&data, av[1]))
+		return (1);
 	data_init(&data);
-	data.sprite = &img;
-	img.img1 = mlx_xpm_file_to_image(data.mlx, "./sprite/wall.xpm", &x, &y);
-	img.img2 = mlx_xpm_file_to_image(data.mlx, "./sprite/floor.xpm", &x, &y);
-	img.img3 = mlx_xpm_file_to_image(data.mlx, "./sprite/collect.xpm", &x, &y);
-	img.img4 = mlx_xpm_file_to_image(data.mlx, "./sprite/player2.xpm", &x, &y);
-	img.img5 = mlx_xpm_file_to_image(data.mlx, "./sprite/door.xpm", &x, &y);
-	create_map("./test.ber", &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, input, &data);
-	mlx_hook(data.win, DestroyNotify, NoEventMask, quit, &data);
 	mlx_loop(data.mlx);
 }
