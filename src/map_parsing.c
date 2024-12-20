@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2024/12/18 14:22:14 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/20 13:26:47 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static char	**read_map(int fd)
 static int	check_condition(t_data *data, char *path)
 {
 	int		fd;
+	int		i;
 	char	**map;
 
+	i = 0;
 	fd = open(path, O_RDONLY);
 	map = read_map(fd);
 	if (!map)
@@ -77,6 +79,13 @@ static int	check_condition(t_data *data, char *path)
 	if (all_access(data, map))
 		return (free_the_mallocs(map), 4);
 	data->map = map;
+	while (map[0][i] != '\n')
+		i++;
+	data->w_size[0] = i;
+	i = 0;
+	while (map[i])
+		i++;
+	data->w_size[1] = i;
 	return (0);
 }
 

@@ -10,7 +10,7 @@ BLUE   = \033[34m
 RED    = \033[31m
 RESET  = \033[0m
 
-FILE =	main.c check_map.c map_parsing.c pathing.c
+FILE =	main.c check_map.c map_parsing.c pathing.c drawing.c input.c
 
 LIB_D = libft/
 

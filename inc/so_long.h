@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 10:55:25 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/20 15:39:07 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 // settings
-# define DEFAULT_Y 1080
-# define DEFAULT_X 1920
+# define DEFAULT_Y 2160
+# define DEFAULT_X 3840
 # define TITLE "So long"
 
 // sprite
@@ -25,6 +25,7 @@
 # define OBJ "./sprite/obj.xpm"
 # define CEXIT "./sprite/door.xpm"
 # define TILE "./sprite/tile.xpm"
+# define GATO "./sprite/end.xpm"
 
 // key map
 # define W_KEY 119
@@ -54,6 +55,7 @@ typedef struct	s_sprite
 	t_pict	play;
 	t_pict	c_ex;
 	t_pict	o_ex;
+	t_pict	gato;
 }			t_sprite;
 
 typedef struct s_entity
@@ -72,7 +74,9 @@ typedef struct s_data
 	void		*win;
 	t_sprite	sprite;
 	int			exit;
+	int			end;
 	int			w_size[2];
+	int			move;
 	char		**map;
 }		t_data;
 
@@ -81,5 +85,14 @@ int	map_parsing(t_data *data, char *path);
 int	check_map(char **map);
 int	check_data(t_data *data, char **map);
 int	all_access(t_data *data, char **map);
+
+//input and moving
+int	input(int key, void *param);
+void	end_game(t_data *data);
+int	clean_exit(t_data *data, int error);
+
+//generate world
+void	world_init(t_data *data);
+void	draw_tiles(t_data *data, void *img, size_t x, size_t y);
 
 #endif
