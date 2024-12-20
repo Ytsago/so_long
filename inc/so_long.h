@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2024/12/18 17:26:37 by secros           ###   ########.fr       */
+/*   Updated: 2024/12/20 10:55:25 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 // sprite
 # define WALL "./sprite/wall.xpm"
+# define WALL2 "./sprite/wall2.xpm"
 # define PLAYER "./sprite/player.xpm"
 # define OBJ "./sprite/obj.xpm"
 # define CEXIT "./sprite/door.xpm"
@@ -47,6 +48,7 @@
 typedef struct	s_sprite
 {
 	t_pict	wall;
+	t_pict	wall2;
 	t_pict	tile;
 	t_pict	obj;
 	t_pict	play;
@@ -69,8 +71,8 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	t_sprite	sprite;
+	int			exit;
 	int			w_size[2];
-	int			pos[2];
 	char		**map;
 }		t_data;
 
