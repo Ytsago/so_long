@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/07 11:46:38 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/07 11:55:09 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,6 @@ void	setting(t_data *data, t_pict *load)
 	load->img = mlx_xpm_file_to_image(data->mlx, "./sprite/settings.xpm", &x[1], &x[0]);
 	load->addr = mlx_get_data_addr(load->img, &load->bytes, &load->l_len, &load->endian);
 	data->w_size[0] = 30;
-	ft_printf("%d", data->set);
 	if (data->set == 0)
 		data->w_size[1] = 66;
 	else if (data->set == 1)
@@ -318,7 +317,11 @@ int main (int ac, char **av)
 	t_data	data;
 	t_pict	load;
 
-	(void) ac;
+	if (ac != 2)
+	{
+		write (2, "Error\nNot the right number of arguments", 40);
+		return (1);
+	}
 	data.path = av[1];
 	load.img = NULL;
 	data.mlx = mlx_init();
