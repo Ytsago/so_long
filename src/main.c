@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 15:41:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/07 11:51:30 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	main(int ac, char **av)
 	x = 0;
 	y = 0;
 	if (ac != 2)
+	{
+		write (2, "Error\nNot the right number of arguments", 40);
 		return (1);
+	}
 	if (map_parsing(&data, av[1]))
 		return (1);
 	data_init(&data);
