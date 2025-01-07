@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 14:38:26 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/07 11:18:26 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	draw_world(t_data *data)
 
 void	world_init(t_data *data)
 {
-	size_t	i;
+/* 	size_t	i;
 
 	i = 0;
 	while (data->map[0][i] != '\n')
@@ -66,6 +66,6 @@ void	world_init(t_data *data)
 	{
 		write(2, "Map to large\n", 13);
 		clean_exit(data, 1);
-	}
+	} */
 	draw_world(data);
 }

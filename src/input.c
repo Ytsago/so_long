@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 15:41:08 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/07 08:16:12 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	input(int key, void *param)
 	if (key == D_KEY && map[y][x + 1] != '1' && data->end == 0
 		&& (map[y][x + 1] != 'e' || data->exit == 1))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 2);
-	if (key == A_KEY && map[y][x - 1] != '1'&& data->end == 0
+	if (key == A_KEY && map[y][x - 1] != '1' && data->end == 0
 		&& (map[y][x - 1] != 'e' || data->exit == 1))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 3);
 	if (key == S_KEY && map[y + 1][x] != '1' && data->end == 0

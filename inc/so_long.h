@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 15:39:07 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/07 10:33:27 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define SO_LONG_H
 
 // settings
-# define DEFAULT_Y 2160
-# define DEFAULT_X 3840
+# define DEFAULT_Y 1080
+# define DEFAULT_X 1920
 # define TITLE "So long"
 
 // sprite
@@ -33,10 +33,13 @@
 # define S_KEY 115
 # define D_KEY 100
 # define ESCAPE 65307
+# define ENTER 65293
+# define SPACE 32
 
 # include "mlx.h"
 # include "mlx_int.h"
 # include "libft.h"
+# include "ft_printf.h"
  typedef struct	s_pict
 {
 	void	*img;
@@ -67,17 +70,34 @@ typedef struct s_entity
 	struct s_entity *next;
 }				t_entity;
 
+typedef struct s_pos
+{
+	int			x;
+	int			y;
+}				t_pos;
+
+typedef struct s_load
+{
+	t_pict	*load;
+	t_pos	pos;
+	void	*win;
+}				t_load;
+
+
 typedef struct s_data
 {
 	t_entity	player;
+	t_sprite	sprite;
+	t_pict		*load;
+	char		**map;
+	char		*path;
 	void		*mlx;
 	void		*win;
-	t_sprite	sprite;
 	int			exit;
 	int			end;
 	int			w_size[2];
 	int			move;
-	char		**map;
+	int			set;
 }		t_data;
 
 //map_parsing
