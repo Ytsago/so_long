@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 14:09:13 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:29:10 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ static void	draw_world(t_data *data, int i, int j)
 	int	x;
 
 	y = 0;
-	while (data->map[y + j])
+	while (y  < data->w_size[1] + 1 / 64 && data->map[y + j])
 	{
 		x = 0;
-		while (data->map[j + y][i + x])
+		while (x < data->w_size[0] + 1 / 64 && data->map[j + y][i + x])
 		{
 			if (data->map[j + y][i + x] == '1')
 				draw_tiles(data, data->sprite.wall.img, x, y);
@@ -94,10 +94,14 @@ void	world_init(t_data *data)
 {
 	int	i;
 	int	j;
-	char	**map;
 
-	i = 0;
-	j = 0;
-	map = data->map;
-	draw_world(data, data->player.pos_x, data->player.pos_y);
+	i = data->w_size[0] / 128;
+	j = data->w_size[1] / 128;
+	ft_printf("%d", ft_tablen(data->map));
+	if (data->player.pos_x + i > (int)ft_strlen(data->map[0]))
+		i -= (ft_strlen(data->map[0])) - (i + data->player.pos_x - 2);
+	if (data->player.pos_x - i < 0)
+		i = 0;
+	//ft_printf("%d %d", i,data->player.pos_x);
+	draw_world(data, i, 0);
 }
