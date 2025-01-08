@@ -6,13 +6,13 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2024/12/20 11:38:00 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 14:08:13 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	is_wall(size_t x, size_t y, char **map)
+static int	is_wall(int x, int y, char **map)
 {
 	if (map[y][x] >= 'A' && map[y][x] <= 'Z')
 	{
@@ -27,7 +27,7 @@ static int	is_wall(size_t x, size_t y, char **map)
 	return (0);
 }
 
-static void	pathing(size_t x, size_t y, char **map)
+static void	pathing(int x, int y, char **map)
 {
 	if (is_wall(x + 1, y, map))
 		pathing(x + 1, y, map);
@@ -41,8 +41,8 @@ static void	pathing(size_t x, size_t y, char **map)
 
 int	all_access(t_data *data, char **map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	j = 0;
 	pathing(data->player.pos_x, data->player.pos_y, map);

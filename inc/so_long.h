@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 08:40:36 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 14:08:48 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct	s_sprite
 typedef struct s_entity
 {
 	int				type;
-	size_t			pos_x;
-	size_t			pos_y;
+	int				pos_x;
+	int				pos_y;
 	int				life;
 	struct s_entity *next;
 }				t_entity;
@@ -107,6 +107,6 @@ int		clean_exit(t_data *data, int error);
 
 //generate world
 void	world_init(t_data *data);
-void	draw_tiles(t_data *data, void *img, size_t x, size_t y);
+void	draw_tiles(t_data *data, void *img, int x, int y);
 
 #endif

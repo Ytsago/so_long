@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 08:13:40 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 14:08:20 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static char	**new_line(char **map, char *str, int count)
 {
 	char	**new;
-	size_t	i;
+	int	i;
 
 	i = 0;
 	new = malloc(sizeof(char *) * (count + 1));

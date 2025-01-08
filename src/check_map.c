@@ -6,15 +6,15 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/07 10:20:24 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 14:08:40 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static size_t	check_ex_row(char *str)
+static int	check_ex_row(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -26,9 +26,9 @@ static size_t	check_ex_row(char *str)
 	return (i);
 }
 
-static size_t	check_line(char *str)
+static int	check_line(char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (str[i++] != '1')
@@ -48,8 +48,8 @@ static size_t	check_line(char *str)
 
 int	check_map(char **map)
 {
-	size_t	len;
-	size_t	i;
+	int	len;
+	int	i;
 
 	i = 1;
 	len = check_ex_row(map[0]);
@@ -63,7 +63,7 @@ int	check_map(char **map)
 	return (0);
 }
 
-static int	set_player(t_data *data, size_t x, size_t y)
+static int	set_player(t_data *data, int x, int y)
 {
 	if (data->player.pos_x == 0 && data->player.pos_y == 0)
 	{
@@ -76,8 +76,8 @@ static int	set_player(t_data *data, size_t x, size_t y)
 
 int	check_data(t_data *data, char **map)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 	int		count[2];
 
 	j = 0;

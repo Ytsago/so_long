@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 08:06:23 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 14:09:13 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,37 @@ void	erease_cursor(t_pict *img, int x, int y)
 	}
 }
 
-void	draw_tiles(t_data *data, void *img, size_t x, size_t y)
+void	draw_tiles(t_data *data, void *img, int x, int y)
 {
-	if (data->map[y][x] == 'e'
+/* 	if (data->map[y][x] == 'e'
 		&& (data->player.pos_x != x || data->player.pos_y != y))
 		img = data->sprite.c_ex.img;
 	if (data->map[y + 1])
 		if (data->map[y + 1][x] == '1' && data->map[y][x] == '1')
-			img = data->sprite.wall2.img;
+			img = data->sprite.wall2.img; */
 	mlx_put_image_to_window(data->mlx, data->win, img, x * 64, y * 64);
 }
 
-static void	draw_world(t_data *data)
+static void	draw_world(t_data *data, int i, int j)
 {
-	size_t	y;
-	size_t	x;
+	int	y;
+	int	x;
 
 	y = 0;
-	while (data->map[y])
+	while (data->map[y + j])
 	{
 		x = 0;
-		while (data->map[y][x])
+		while (data->map[j + y][i + x])
 		{
-			if (data->map[y][x] == '1')
+			if (data->map[j + y][i + x] == '1')
 				draw_tiles(data, data->sprite.wall.img, x, y);
-			if (data->map[y][x] == '2' || data->map[y][x] == '0')
+			if (data->map[j + y][i + x] == '2' || data->map[j + y][i + x] == '0')
 				draw_tiles(data, data->sprite.tile.img, x, y);
-			if (data->map[y][x] == 'e')
+			if (data->map[j + y][i + x] == 'e')
 				draw_tiles(data, data->sprite.c_ex.img, x, y);
-			if (data->map[y][x] == 'c')
+			if (data->map[j + y][i + x] == 'c')
 				draw_tiles(data, data->sprite.obj.img, x, y);
-			if (data->map[y][x] == 'p')
+			if (data->map[j + y][i + x] == 'p')
 				draw_tiles(data, data->sprite.play.img, x, y);
 			x++;
 		}
@@ -92,20 +92,12 @@ static void	draw_world(t_data *data)
 
 void	world_init(t_data *data)
 {
-/* 	size_t	i;
+	int	i;
+	int	j;
+	char	**map;
 
 	i = 0;
-	while (data->map[0][i] != '\n')
-		i++;
-	data->w_size[0] = (int) i;
-	i = 0;
-	while (data->map[i])
-		i++;
-	data->w_size[1] = (int) i;
-	if (data->w_size[0] > 60 || data->w_size[1] > 33)
-	{
-		write(2, "Map to large\n", 13);
-		clean_exit(data, 1);
-	} */
-	draw_world(data);
+	j = 0;
+	map = data->map;
+	draw_world(data, data->player.pos_x, data->player.pos_y);
 }

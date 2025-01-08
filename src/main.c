@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 08:09:46 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 12:52:38 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	clean_exit(t_data *data, int error)
 		error = 0;
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
-	 free_the_mallocs(data->map);
+	free_the_mallocs(data->map);
 	if (data->sprite.wall.img)
 		mlx_destroy_image(data->mlx, data->sprite.wall.img);
 	if (data->sprite.play.img)
@@ -32,8 +32,6 @@ int	clean_exit(t_data *data, int error)
 		mlx_destroy_image(data->mlx, data->sprite.tile.img);
 	if (data->sprite.wall2.img)
 		mlx_destroy_image(data->mlx, data->sprite.wall2.img);
-/* 	if (data->sprite.gato.img)
-		mlx_destroy_image(data->mlx, data->sprite.gato.img); */
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	if (error)
@@ -55,7 +53,6 @@ static void	load_asset(t_data *data)
 	as.obj.img = mlx_xpm_file_to_image(data->mlx, OBJ, &x, &y);
 	as.c_ex.img = mlx_xpm_file_to_image(data->mlx, CEXIT, &x, &y);
 	as.wall2.img = mlx_xpm_file_to_image(data->mlx, WALL2, &x, &y);
-	//as.gato.img = mlx_xpm_file_to_image(data->mlx, GATO, &x, &y);
 	data->sprite = as;
 	if (!as.c_ex.img || !as.obj.img || !as.play.img
 		|| !as.tile.img || !as.wall.img || !as.wall2.img)
@@ -117,7 +114,6 @@ void	end_game(t_data *data)
 	pt[1] = data->win;
 	pt[2] = data->sprite.gato.img;
 	data->end = 1;
-//	mlx_put_image_to_window(pt[0], pt[1], pt[2], x, y);
 }
 /*
 int	main(int ac, char **av)
