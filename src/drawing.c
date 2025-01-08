@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 15:57:12 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:28:01 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	draw_world(t_data *data, int i, int j)
 	int	x;
 
 	y = 0;
-	while (y  < data->w_size[1] + 1 / 64 && data->map[y + j])
+	while (y  < 1 + data->w_size[1] / 64 && data->map[y + j])
 	{
 		x = 0;
 		while (x < data->w_size[0] + 1 / 64 && data->map[j + y][i + x])
@@ -89,7 +89,7 @@ static void	draw_world(t_data *data, int i, int j)
 		y++;
 	}
 }
-
+/*
 void	world_init(t_data *data)
 {
 	int	i[2];
@@ -97,11 +97,33 @@ void	world_init(t_data *data)
 
 	i[0] = data->w_size[0] / 128;
 	j[0] = data->w_size[1] / 128;
-	ft_printf("%d", ft_tablen(data->map));
-	if (data->player.pos_x + i[0] > (int)ft_strlen(data->map[0]))
-		i[1] = (ft_strlen(data->map[0])) - (i[0] + data->player.pos_x - 2);
-	if (data->player.pos_x - i[0] < 0)
+//	ft_printf("%d ", ft_tablen(data->map));
+	i[1] = data->player.pos_x - i[0];
+	j[1] = data->player.pos_y - j[0];
+	//if (data->player.pos_x + i[0] > (int)ft_strlen(data->map[0] - 1))
+	//	i[1] = i[0] - ((ft_strlen(data->map[0])) - (i[0] + data->player.pos_x));
+	if (data->player.pos_x - i[1] < 0)
 		i[1] = 0;
-	//ft_printf("%d %d", i,data->player.pos_x);
-	draw_world(data, i[1], 0);
+//	ft_printf("%d %d, %d, %d", i[0],data->player.pos_x, ft_strlen(data->map[0]), i[1]);
+	draw_world(data, i[1], j[1]);
+}
+*/
+void	world_init(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = data->w_size[0] / 128;
+	j = data->w_size[1] / 128;
+	i = data->player.pos_x - i;
+	if (data->player.pos_x + data->w_size[0] / 128 > (int) ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0))
+	 	i = ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0) - data->w_size[0] / 64;
+	if (i < 0)
+		i = 0;
+	j = data->player.pos_y - j;
+	if (data->player.pos_y + data->w_size[1] / 128 > (int) ft_tablen(data->map) - 1)
+	 	j = ft_tablen(data->map) - 1 + (data->w_size[0] % 128 != 0) - data->w_size[1] / 64;
+	if (j < 0)
+		j = 0;
+	draw_world(data, i, j);
 }

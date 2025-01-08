@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 14:08:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 17:15:42 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	check_pos(t_data *data)
 		data->exit = 1;
 }
 
-static void	moving(t_data *data, int *x, int *y, int dir)
+/* static void	moving(t_data *data, int *x, int *y, int dir)
 {
 	ft_printf("move :%d ", data->move++);
 	if (dir == 1)
@@ -67,6 +67,41 @@ static void	moving(t_data *data, int *x, int *y, int dir)
 		draw_tiles(data, data->sprite.tile.img, *x, *y);
 		*y += 1;
 		draw_tiles(data, data->sprite.play.img, *x, *y);
+	}
+}
+ */
+static void	moving(t_data *data, int *x, int *y, int dir)
+{
+	ft_printf("move :%d ", data->move++);
+	ft_printf("\n--%d--\n", data->w_size[0] % 128);
+	ft_printf("%d", data->w_size[1] % 128);
+	if (dir == 1)
+	{
+		data->map[*y][*x] = '2';
+		*y -= 1;
+		data->map[*y][*x] = 'p';
+		world_init(data);
+	}
+	else if (dir == 2)
+	{
+		data->map[*y][*x] = '2';
+		*x += 1;
+		data->map[*y][*x] = 'p';
+		world_init(data);
+	}
+	else if (dir == 3)
+	{
+		data->map[*y][*x] = '2';
+		*x -= 1;
+		data->map[*y][*x] = 'p';
+		world_init(data);
+	}
+	else if (dir == 4)
+	{
+		data->map[*y][*x] = '2';
+		*y += 1;
+		data->map[*y][*x] = 'p';
+		world_init(data);
 	}
 }
 
