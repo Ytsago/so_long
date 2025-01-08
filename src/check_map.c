@@ -6,13 +6,13 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 14:08:40 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 19:06:34 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_ex_row(char *str)
+int	check_ex_row(char *str)
 {
 	int	i;
 

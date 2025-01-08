@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 12:52:38 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 19:02:30 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	resolution(t_data *data)
 
 static void	data_init(t_data *data)
 {
-	data->mlx = mlx_init();
+	//data->mlx = mlx_init();
 	data->exit = 0;
 	data->move = 1;
 	data->end = 0;
