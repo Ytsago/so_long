@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 15:29:10 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 15:57:12 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,16 @@ static void	draw_world(t_data *data, int i, int j)
 
 void	world_init(t_data *data)
 {
-	int	i;
-	int	j;
+	int	i[2];
+	int	j[2];
 
-	i = data->w_size[0] / 128;
-	j = data->w_size[1] / 128;
+	i[0] = data->w_size[0] / 128;
+	j[0] = data->w_size[1] / 128;
 	ft_printf("%d", ft_tablen(data->map));
-	if (data->player.pos_x + i > (int)ft_strlen(data->map[0]))
-		i -= (ft_strlen(data->map[0])) - (i + data->player.pos_x - 2);
-	if (data->player.pos_x - i < 0)
-		i = 0;
+	if (data->player.pos_x + i[0] > (int)ft_strlen(data->map[0]))
+		i[1] = (ft_strlen(data->map[0])) - (i[0] + data->player.pos_x - 2);
+	if (data->player.pos_x - i[0] < 0)
+		i[1] = 0;
 	//ft_printf("%d %d", i,data->player.pos_x);
-	draw_world(data, i, 0);
+	draw_world(data, i[1], 0);
 }
