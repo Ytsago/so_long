@@ -6,11 +6,51 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/07 11:18:26 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 08:06:23 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	draw_cursor(t_pict *img, int x, int y)
+{
+	int		i;
+	int		j;
+	char	*pixel;
+
+	i = 0;
+	while (i < 30)
+	{
+		j = 0;
+		while ((j < 2 * i && i <= 15) || (i > 15 && j < 60 - i * 2))
+		{
+			pixel = &img->addr[(y + i) * img->l_len + (x + j) * img->bytes / 8];
+			*(unsigned int *) pixel = 0x00FF0000;
+			j++;
+		}
+		i++;
+	}
+}
+
+void	erease_cursor(t_pict *img, int x, int y)
+{
+	int		i;
+	int		j;
+	char	*pixel;
+
+	i = 0;
+	while (i < 30)
+	{
+		j = 0;
+		while ((j < 2 * i && i <= 15) || (i > 15 && j < 60 - i * 2))
+		{
+			pixel = &img->addr[(y + i) * img->l_len + (x + j) * img->bytes / 8];
+			*(unsigned int *) pixel = 0x432a73;
+			j++;
+		}
+		i++;
+	}
+}
 
 void	draw_tiles(t_data *data, void *img, size_t x, size_t y)
 {

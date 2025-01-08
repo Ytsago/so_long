@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/07 10:33:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/08 08:40:36 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,6 @@ typedef struct s_entity
 	struct s_entity *next;
 }				t_entity;
 
-typedef struct s_pos
-{
-	int			x;
-	int			y;
-}				t_pos;
-
-typedef struct s_load
-{
-	t_pict	*load;
-	t_pos	pos;
-	void	*win;
-}				t_load;
-
-
 typedef struct s_data
 {
 	t_entity	player;
@@ -100,6 +86,14 @@ typedef struct s_data
 	int			set;
 }		t_data;
 
+//settings
+void	loading_screen(t_data *data, t_pict *load);
+int		launch(t_data *data);
+
+//image and screem rendering
+void	draw_cursor(t_pict *img, int x, int y);
+void	erease_cursor(t_pict *img, int x, int y);
+
 //map_parsing
 int	map_parsing(t_data *data, char *path);
 int	check_map(char **map);
@@ -107,9 +101,9 @@ int	check_data(t_data *data, char **map);
 int	all_access(t_data *data, char **map);
 
 //input and moving
-int	input(int key, void *param);
+int		input(int key, void *param);
 void	end_game(t_data *data);
-int	clean_exit(t_data *data, int error);
+int		clean_exit(t_data *data, int error);
 
 //generate world
 void	world_init(t_data *data);

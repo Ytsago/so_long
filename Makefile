@@ -10,7 +10,7 @@ BLUE   = \033[34m
 RED    = \033[31m
 RESET  = \033[0m
 
-FILE =	main.c check_map.c map_parsing.c pathing.c drawing.c input.c
+FILE =	main.c check_map.c map_parsing.c pathing.c drawing.c input.c setting.c
 
 LIB_D = libft/
 
@@ -36,7 +36,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJS)
 	@echo "$(YELLOW)Creating final product : $(BLUE)$@...$(RESET)"
-	$(CC) $(CFLAGS) $(LFLAGS) $^ $(LIB) -o $@ && echo "$(GREEN)$@ Created successfully !$(RESET)"
+	@$(CC) $(CFLAGS) $(LFLAGS) $^ $(LIB) -o $@ && echo "$(GREEN)$@ Created successfully !$(RESET)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(LIB) $(INCDIR)$(INC) | $(OBJDIR)
 	$(CC) -c $(CFLAGS) -I $(INCDIR) -I $(MLX_D) -I $(LIB_D)$(INCDIR) $< -o $@
