@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 17:15:42 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/09 09:35:53 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	check_pos(t_data *data)
 	int	y;
 	int	count;
 
-	x = data->player.pos_x;
-	y = data->player.pos_y;
+	x = data->player.pos_x / 64;
+	y = data->player.pos_y / 64;
 	count = 0;
 	if (data->map[y][x] == 'c')
 		data->map[y][x] = 'C';
@@ -73,34 +73,32 @@ static void	check_pos(t_data *data)
 static void	moving(t_data *data, int *x, int *y, int dir)
 {
 	ft_printf("move :%d ", data->move++);
-	ft_printf("\n--%d--\n", data->w_size[0] % 128);
-	ft_printf("%d", data->w_size[1] % 128);
 	if (dir == 1)
 	{
-		data->map[*y][*x] = '2';
+		data->map[*y / 64][*x / 64] = '2';
 		*y -= 1;
-		data->map[*y][*x] = 'p';
+		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 2)
 	{
-		data->map[*y][*x] = '2';
+		data->map[*y / 64][*x / 64] = '2';
 		*x += 1;
-		data->map[*y][*x] = 'p';
+		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 3)
 	{
-		data->map[*y][*x] = '2';
+		data->map[*y / 64][*x / 64] = '2';
 		*x -= 1;
-		data->map[*y][*x] = 'p';
+		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 4)
 	{
-		data->map[*y][*x] = '2';
+		data->map[*y / 64][*x / 64] = '2';
 		*y += 1;
-		data->map[*y][*x] = 'p';
+		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 }
@@ -114,8 +112,8 @@ int	input(int key, void *param)
 
 	data = param;
 	map = data->map;
-	x = data->player.pos_x;
-	y = data->player.pos_y;
+	x = data->player.pos_x / 64;
+	y = data->player.pos_y / 64;
 	if (key == ESCAPE)
 		clean_exit(param, 0);
 	if (key == W_KEY && map[y - 1][x] != '1' && data->end == 0

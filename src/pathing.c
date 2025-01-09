@@ -6,13 +6,13 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 14:08:13 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/09 09:34:04 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	is_wall(int x, int y, char **map)
+static int	is_path(int x, int y, char **map)
 {
 	if (map[y][x] >= 'A' && map[y][x] <= 'Z')
 	{
@@ -29,13 +29,13 @@ static int	is_wall(int x, int y, char **map)
 
 static void	pathing(int x, int y, char **map)
 {
-	if (is_wall(x + 1, y, map))
+	if (is_path(x + 1, y, map))
 		pathing(x + 1, y, map);
-	if (is_wall(x - 1, y, map))
+	if (is_path(x - 1, y, map))
 		pathing(x - 1, y, map);
-	if (is_wall(x, y + 1, map))
+	if (is_path(x, y + 1, map))
 		pathing(x, y + 1, map);
-	if (is_wall(x, y - 1, map))
+	if (is_path(x, y - 1, map))
 		pathing(x, y - 1, map);
 }
 
@@ -45,7 +45,7 @@ int	all_access(t_data *data, char **map)
 	int	j;
 
 	j = 0;
-	pathing(data->player.pos_x, data->player.pos_y, map);
+	pathing(data->player.pos_x / 64, data->player.pos_y / 64, map);
 	while (map[j])
 	{
 		i = 0;

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 19:02:30 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/09 09:48:24 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	load_asset(t_data *data)
 	as.c_ex.img = mlx_xpm_file_to_image(data->mlx, CEXIT, &x, &y);
 	as.wall2.img = mlx_xpm_file_to_image(data->mlx, WALL2, &x, &y);
 	data->sprite = as;
+	as.play.addr = mlx_get_data_addr(as.play.img, &as.play.bytes,\
+		&as.play.l_len, &as.play.endian);
 	if (!as.c_ex.img || !as.obj.img || !as.play.img
 		|| !as.tile.img || !as.wall.img || !as.wall2.img)
 	{
@@ -89,7 +91,7 @@ static void	resolution(t_data *data)
 
 static void	data_init(t_data *data)
 {
-	//data->mlx = mlx_init();
+	data->mlx = mlx_init();
 	data->exit = 0;
 	data->move = 1;
 	data->end = 0;
@@ -115,26 +117,7 @@ void	end_game(t_data *data)
 	pt[2] = data->sprite.gato.img;
 	data->end = 1;
 }
-/*
-int	main(int ac, char **av)
-{
-	t_data		data;
-	int			x;
-	int			y;
 
-	x = 0;
-	y = 0;
-	if (ac != 2)
-		return (1);
-	if (map_parsing(&data, av[1]))
-		return (1);
-	data_init(&data);
-	world_init(&data);
-	mlx_hook(data.win, KeyPress, KeyPressMask, input, &data);
-	mlx_hook(data.win, DestroyNotify, 0, clean_exit, &data);
-	mlx_loop(data.mlx);
-}
-*/ 
 int	launch(t_data *data)
 {
 	int			x;

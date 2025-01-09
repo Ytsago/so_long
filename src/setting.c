@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:01:12 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 19:02:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/09 08:59:52 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static int	confirm(t_data *data, int key)
 		mlx_loop_end(data->mlx);
 		mlx_destroy_image(data->mlx, data->load->img);
 		mlx_destroy_window(data->mlx, data->win);
-		//mlx_destroy_display(data->mlx);
-		//free(data->mlx);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
 		launch(data);
 	}
 	return (0);

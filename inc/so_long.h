@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/08 19:07:38 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/09 09:29:07 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int		clean_exit(t_data *data, int error);
 
 //generate world
 void	world_init(t_data *data);
-void	draw_tiles(t_data *data, void *img, int x, int y);
+//void	draw_tiles(t_data *data, void *img, int x[2], int y[2]);
 
 #endif
