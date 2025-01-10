@@ -1,7 +1,7 @@
 /* XPM */
 static char * player_xpm[] = {
 "64 65 778 2",
-"  	c #5C240F",
+"  	c None",
 ". 	c #521C09",
 "+ 	c #531C09",
 "@ 	c #531D09",
@@ -793,7 +793,7 @@ static char * player_xpm[] = {
 "+@@@n H+_.#+A+O.E.#@$@%@&@*@=@c.Q+D.D.D.D.D.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.D.D.D.D.D.Q+c.`.N.x.g+)+-@-@/+I.>.r p ;@(.>@",
 "p.@@,@'@_.)@!@~@G.{@]@^@/@(@(@c.Q+D.D.D.D.D.D.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.{.D.D.D.D.D.D.Q+c._@:@w+~@A+~@~@$+<@[@}@..H+(.|@",
 "( @@o 5.| 1@2@3@P+4@B+5@w.w.w.c.Q+D.D.D.D.D.D.{.{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.{.{.D.D.D.D.D.D.Q+c.G.x+O.N.x.N.g+x.L.6@}@W 7@(.8@",
-"p.r o 5.).9@0@5@v.a@a@a@S+b@c@c.Q+D.D.D.Q+D.{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.{.D.D.D.D.D.Q+c.H.d@d@e@{+e@f@g@y.p.'.W h@(.i@",
+"p.r o 5.).                   c.Q+D.D.D.Q+D.{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.{.D.D.D.D.D.Q+c.H.d@d@e@{+e@f@g@y.p.'.W h@(.i@",
 "( T o 5.'.9@!@G.G.Y+Y+H.j@L.M+c.Q+Q+D.Q+{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.Q+D.D.D.Q+c.-@k@l@l@m@n@m@$+S._.,.p o@(.|@",
 "+@T o r.,.1@p@q@q@r@I.Q.,+s@t@c.Q+Q+Q+{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.{.Q+D.Q+Q+c.M.M.K.u@v@J.S.e+w@[@}@..o@%.x@",
 "y@z@X A@,.B@u@k@C@C@7+C@C@D@k@c.Q+Q+Q+{.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.D.{.Q+Q+Q+c.g+g+-@E@O.O.N.O.F@G@}@q $.(.2.",

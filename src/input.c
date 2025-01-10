@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 09:35:53 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/10 14:15:01 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,28 +76,29 @@ static void	moving(t_data *data, int *x, int *y, int dir)
 	if (dir == 1)
 	{
 		data->map[*y / 64][*x / 64] = '2';
-		*y -= 1;
+		*y -= 64;
 		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 2)
 	{
 		data->map[*y / 64][*x / 64] = '2';
-		*x += 1;
+		*x += 64;
+
 		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 3)
 	{
 		data->map[*y / 64][*x / 64] = '2';
-		*x -= 1;
+		*x -= 64;
 		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}
 	else if (dir == 4)
 	{
 		data->map[*y / 64][*x / 64] = '2';
-		*y += 1;
+		*y += 64;
 		data->map[*y / 64][*x / 64] = 'p';
 		world_init(data);
 	}

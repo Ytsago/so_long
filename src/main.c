@@ -6,12 +6,18 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 09:48:24 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/10 14:12:38 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "so_long.h"
+
+static void	destroy_image(void *mlx, void *img)
+{
+	if (img)
+		mlx_destroy_image(mlx, img);
+}
 
 int	clean_exit(t_data *data, int error)
 {
@@ -20,23 +26,34 @@ int	clean_exit(t_data *data, int error)
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	free_the_mallocs(data->map);
-	if (data->sprite.wall.img)
-		mlx_destroy_image(data->mlx, data->sprite.wall.img);
-	if (data->sprite.play.img)
-		mlx_destroy_image(data->mlx, data->sprite.play.img);
-	if (data->sprite.obj.img)
-		mlx_destroy_image(data->mlx, data->sprite.obj.img);
-	if (data->sprite.c_ex.img)
-		mlx_destroy_image(data->mlx, data->sprite.c_ex.img);
-	if (data->sprite.tile.img)
-		mlx_destroy_image(data->mlx, data->sprite.tile.img);
-	if (data->sprite.wall2.img)
-		mlx_destroy_image(data->mlx, data->sprite.wall2.img);
+	destroy_image(data->mlx, data->sprite.wall.img);
+	destroy_image(data->mlx, data->sprite.play.img);
+	destroy_image(data->mlx, data->sprite.obj.img);
+	destroy_image(data->mlx, data->sprite.c_ex.img);
+	destroy_image(data->mlx, data->sprite.tile.img);
+	destroy_image(data->mlx, data->sprite.wall2.img);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 	if (error)
 		write(2, "Error\nFailed to load game", 26);
 	exit(error);
+}
+
+static t_pict	new_image(t_data *data, char *path)
+{
+	t_pict	img;
+	int		x;
+	int		y;
+
+	img.img = mlx_xpm_file_to_image(data->mlx, path, &x, &y);
+	if (!img.img)
+	{
+		write (2, "Failed to load asset\n", 21);
+	}
+	else
+		img.addr = mlx_get_data_addr(img.img, &img.bytes,\
+		&img.l_len, &img.endian);
+	return (img);
 }
 
 static void	load_asset(t_data *data)
@@ -47,21 +64,16 @@ static void	load_asset(t_data *data)
 
 	x = 0;
 	y = 0;
-	as.wall.img = mlx_xpm_file_to_image(data->mlx, WALL, &x, &y);
-	as.play.img = mlx_xpm_file_to_image(data->mlx, PLAYER, &x, &y);
-	as.tile.img = mlx_xpm_file_to_image(data->mlx, TILE, &x, &y);
-	as.obj.img = mlx_xpm_file_to_image(data->mlx, OBJ, &x, &y);
-	as.c_ex.img = mlx_xpm_file_to_image(data->mlx, CEXIT, &x, &y);
-	as.wall2.img = mlx_xpm_file_to_image(data->mlx, WALL2, &x, &y);
+	as.wall = new_image(data, WALL);
+	as.play = new_image(data, PLAYER);
+	as.tile = new_image(data, TILE);
+	as.obj = new_image(data, OBJ);
+	as.c_ex = new_image(data, CEXIT);
+	as.wall2 = new_image(data, WALL2);
 	data->sprite = as;
-	as.play.addr = mlx_get_data_addr(as.play.img, &as.play.bytes,\
-		&as.play.l_len, &as.play.endian);
 	if (!as.c_ex.img || !as.obj.img || !as.play.img
 		|| !as.tile.img || !as.wall.img || !as.wall2.img)
-	{
-		write (2, "Failed to load asset\n", 21);
 		clean_exit(data, 1);
-	}
 }
 
 static void	resolution(t_data *data)
@@ -122,6 +134,7 @@ int	launch(t_data *data)
 {
 	int			x;
 	int			y;
+	t_pict		load;
 
 	x = 0;
 	y = 0;
@@ -129,6 +142,12 @@ int	launch(t_data *data)
 		exit(1);
 	data_init(data);
 	world_init(data);
+	load.img = mlx_new_image(data->mlx, data->w_size[0], data->w_size[1]);
+		if (!load.img)
+			clean_exit(data, 1);
+	load.addr = mlx_get_data_addr(load.img, &load.bytes,\
+		&load.l_len, &load.endian);
+	data->load = &load;
 	mlx_hook(data->win, KeyPress, KeyPressMask, input, data);
 	mlx_hook(data->win, DestroyNotify, 0, clean_exit, data);
 	mlx_loop(data->mlx);

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 10:34:16 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/10 15:17:11 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_cursor(t_pict *img, int x, int y)
 		while ((j < 2 * i && i <= 15) || (i > 15 && j < 60 - i * 2))
 		{
 			pixel = &img->addr[(y + i) * img->l_len + (x + j) * img->bytes / 8];
-			*(unsigned int *) pixel = 0x00FF0000;
+			*(unsigned int *) pixel = 0xFF0000;
 			j++;
 		}
 		i++;
@@ -52,56 +52,56 @@ void	erease_cursor(t_pict *img, int x, int y)
 	}
 }
 
-void	draw_player(t_data *data)
+unsigned int	get_pixel(t_pict *img, int x, int y)
 {
-	int		i;
-	int		j;
-	t_pict	*img;
-	char	*pixel;
+	return ((*(unsigned int *) &img->addr[y * img->l_len + x * img->bytes / 8]));
+}
 
-	img = &data->sprite.play;
-	i = 0;
-	while (i < 64)
+void	draw_screen(t_pict *dst, t_pict *src, int x, int y)
+{
+	int				i;
+	int				j;
+	char			*pixel;
+	unsigned int	color;
+
+	j = 0;
+	while (j < 64)
 	{
-		j = 0;
-		while (j < 64)
+		i = 0;
+		while (i < 64)
 		{
-			pixel = &img->addr[i * img->l_len + j * img->bytes / 8];
-			if (*(unsigned int*) pixel == 0x000000)
-				*(unsigned int*) pixel = 0x00000000;
-			j++;
+			color = get_pixel(src, i, j);
+			pixel = &dst->addr[(y + j) * dst->l_len + (x + i) * dst->bytes / 8];
+			if (color != 0xFF000000 && (j + y) < 720 && (x + i) < 1080)
+				*(unsigned int *) pixel = color;
+				//ft_printf("yes\n");
+			i++;
 		}
-		i++;
+		j++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, img, data->player.pos_x, data->player.pos_y * 64);
 }
 
 static void	draw_tiles(t_data *data, int x[2], int y[2])
 {
-	void	*img;
-	static char	first_draw = 0; 
+	t_pict	*img;
 
-	if (first_draw == 0 && data->map[y[1]][x[1]] == 'p')
-	{
-		img = data->sprite.play.img;
-		first_draw = 1;
-	}
-	else
-	{
-		draw_player(data);
-	}
+	if (data->map[y[1]][x[1]] == '\n' || data->map[y[1]][x[1]] == '\0')
+		return ;
+	if (data->map[y[1]][x[1]] == 'p')
+		img = &data->sprite.play;
 	if (data->map[y[1]][x[1]] == '1')
-		img = data->sprite.wall.img;
+		img = &data->sprite.wall;
 	if (data->map[y[1]][x[1]] == '2' || data->map[y[1]][x[1]] == '0')
-		img = data->sprite.tile.img;
+		img = &data->sprite.tile;
 	if (data->map[y[1]][x[1]] == 'e')
-		img = data->sprite.c_ex.img;
+		img = &data->sprite.c_ex;
 	if (data->map[y[1]][x[1]] == 'c')
-		img = data->sprite.obj.img;
+		img = &data->sprite.obj;
 	if (data->map[y[1] + 1] && data->map[y[1] + 1][x[1]] == '1'
 		&& data->map[y[1]][x[1]] == '1')
-		img = data->sprite.wall2.img;
-	mlx_put_image_to_window(data->mlx, data->win, img, x[0] * 64, y[0] * 64);
+		img = &data->sprite.wall2;
+	//draw_screen(data->load, img, x[0] * 64, y[0] * 64);
+	mlx_put_image_to_window(data->mlx, data->win, img->img, x[0] * 64, y[0] * 64);
 }
 
 static void	draw_world(t_data *data, int i, int j)
@@ -124,6 +124,7 @@ static void	draw_world(t_data *data, int i, int j)
 		y[1]++;
 		y[0]++;
 	}
+	//mlx_put_image_to_window(data->mlx, data->win, data->load->img, 0, 0);
 }
 
 void	world_init(t_data *data)
