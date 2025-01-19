@@ -3,6 +3,7 @@ LFLAGS = -lbsd -lX11 -lm -lXext
 CC = cc
 AR = ar
 ARFLAG = -rcs
+MAKE := $(MAKE) -j
 
 GREEN  = \033[32m
 YELLOW = \033[33m

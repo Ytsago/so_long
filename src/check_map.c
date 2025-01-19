@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 09:31:58 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/19 18:13:11 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ static int	set_player(t_data *data, int x, int y)
 
 int	check_data(t_data *data, char **map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	int		count[2];
 
 	j = 0;
