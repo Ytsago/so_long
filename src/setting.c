@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:01:12 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:39:14 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 13:55:56 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	setting(t_data *data, t_pict *load)
 	load->img = mlx_xpm_file_to_image(data->mlx, \
 	"./sprite/settings.xpm", &x[1], &x[0]);
 	if (!load->img)
-		confirm(data, 371);
+		confirm(data, 1);
 	load->addr = mlx_get_data_addr(load->img, &load->bytes, \
 	&load->l_len, &load->endian);
 	data->w_size[0] = 30;
@@ -68,7 +68,7 @@ static void	setting(t_data *data, t_pict *load)
 
 int	confirm(t_data *data, int error)
 {
-	if (data->w_size[1] == 390)
+	if (data->w_size[1] == 390 || error == 1)
 	{
 		if (data->load->img)
 			mlx_destroy_image(data->mlx, data->load->img);
@@ -129,7 +129,7 @@ void	loading_screen(t_data *data, t_pict *load)
 	load->img = mlx_xpm_file_to_image(data->mlx, \
 	"./sprite/loading.xpm", &x[1], &x[0]);
 	if (!load->img)
-		confirm(data, 371);
+		confirm(data, 1);
 	load->addr = mlx_get_data_addr(load->img, \
 	&load->bytes, &load->l_len, &load->endian);
 	draw_cursor(load, 30, 110);

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:44:19 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 13:57:45 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,22 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_pict	load;
 
-	if (ac != 2 && map_parsing(&data, av[1]))
+	if (ac != 2 || map_parsing(&data, av[1]))
 	{
-		write (2, "Error\nNot the right number of arguments", 40);
+		if (ac != 2)
+			write (2, "Error\nNot the right number of arguments", 40);
 		return (1);
 	}
 	load.img = NULL;
 	data.mlx = mlx_init();
 	if (!data.mlx)
 	{
-		write (2, "Error\nFailed to create mlx_ptr", 30);
+		write (2, "Error\n failed to create mlx_ptr", 31);
 		return (1);
 	}
-	data.win = mlx_new_window(data.mlx, 400, 500, TITLE);
+	data.win = NULL;//mlx_new_window(data.mlx, 400, 500, TITLE);
 	if (!data.win)
-	{
-		write (2, "Error\nFailed to create window", 29);
-		return (1);
-	}
+		//trouver une meilleur solution
 	data.set = 0;
 	loading_screen(&data, &load);
 }
