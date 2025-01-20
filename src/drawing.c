@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/19 18:09:59 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 11:21:42 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static void	draw_tiles(t_data *data, int x[2], int y[2])
 		img = &data->sprite.wall;
 	if (data->map[y[1]][x[1]] == '2' || data->map[y[1]][x[1]] == '0')
 		img = &data->sprite.tile;
-	if (data->map[y[1]][x[1]] == 'e')
+	if (data->map[y[1]][x[1]] == 'e' && data->obj > 0)
 		img = &data->sprite.c_ex;
+	if (data->map[y[1]][x[1]] == 'e' && data->obj == 0)
+		img = &data->sprite.o_ex;
 	if (data->map[y[1]][x[1]] == 'c')
 		img = &data->sprite.obj;
 	if (data->map[y[1] + 1] && data->map[y[1] + 1][x[1]] == '1'

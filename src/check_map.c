@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/19 18:13:11 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 09:34:25 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ int	check_data(t_data *data, char **map)
 {
 	int		i;
 	int		j;
-	int		count[2];
+	int		count;
 
 	j = 0;
-	count[0] = 0;
-	count[1] = 0;
+	count = 0;
+	data->obj = 0;
 	while (map[++j])
 	{
 		i = 0;
@@ -92,12 +92,12 @@ int	check_data(t_data *data, char **map)
 				if (set_player(data, i, j))
 					return (1);
 			if (map[j][i] == 'C')
-				count[0]++;
+				data->obj++;
 			if (map[j][i] == 'E')
-				count[1]++;
+				count++;
 		}
 	}
-	if (count[0] > 0 && count[1] == 1)
+	if (data->obj > 0 && count == 1)
 		return (0);
 	return (1);
 }

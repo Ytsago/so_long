@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 09:34:04 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 09:53:20 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	is_path(int x, int y, char **map)
 	if (map[y][x] >= 'A' && map[y][x] <= 'Z')
 	{
 		map[y][x] = ft_tolower(map[y][x]);
+		if (map[y][x] == 'e')
+			return (0);
 		return (1);
 	}
 	if (map[y][x] == '0')

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/10 14:15:01 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 13:23:32 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,93 +23,38 @@ static void	check_pos(t_data *data)
 	y = data->player.pos_y / 64;
 	count = 0;
 	if (data->map[y][x] == 'c')
-		data->map[y][x] = 'C';
-	else if (data->map[y][x] == 'e' && data->exit == 1)
-		end_game(data);
-	else
-		return ;
-	y = 0;
-	while (data->map[y])
 	{
-		x = 0;
-		while (data->map[y][x])
-			if (data->map[y][x++] == 'c')
-				count = 1;
-		y++;
+		data->map[y][x] = 'C';
+		data->obj--;
 	}
-	if (count == 0)
-		data->exit = 1;
+	else if (data->map[y][x] == 'e' && data->obj == 0)
+		end_game(data);
 }
 
-/* static void	moving(t_data *data, int *x, int *y, int dir)
-{
-	ft_printf("move :%d ", data->move++);
-	if (dir == 1)
-	{
-		draw_tiles(data, data->sprite.tile.img, *x, *y);
-		*y -= 1;
-		draw_tiles(data, data->sprite.play.img, *x, *y);
-	}
-	else if (dir == 2)
-	{
-		draw_tiles(data, data->sprite.tile.img, *x, *y);
-		*x += 1;
-		draw_tiles(data, data->sprite.play.img, *x, *y);
-	}
-	else if (dir == 3)
-	{
-		draw_tiles(data, data->sprite.tile.img, *x, *y);
-		*x -= 1;
-		draw_tiles(data, data->sprite.play.img, *x, *y);
-	}
-	else if (dir == 4)
-	{
-		draw_tiles(data, data->sprite.tile.img, *x, *y);
-		*y += 1;
-		draw_tiles(data, data->sprite.play.img, *x, *y);
-	}
-}
- */
 static void	moving(t_data *data, int *x, int *y, int dir)
 {
-	ft_printf("move :%d ", data->move++);
+	data->map[*y / 64][*x / 64] = '2';
+	ft_printf("move :%d\n", data->move++);
 	if (dir == 1)
-	{
-		data->map[*y / 64][*x / 64] = '2';
 		*y -= 64;
-		data->map[*y / 64][*x / 64] = 'p';
-		world_init(data);
-	}
 	else if (dir == 2)
-	{
-		data->map[*y / 64][*x / 64] = '2';
 		*x += 64;
-
-		data->map[*y / 64][*x / 64] = 'p';
-		world_init(data);
-	}
 	else if (dir == 3)
-	{
-		data->map[*y / 64][*x / 64] = '2';
 		*x -= 64;
-		data->map[*y / 64][*x / 64] = 'p';
-		world_init(data);
-	}
 	else if (dir == 4)
-	{
-		data->map[*y / 64][*x / 64] = '2';
 		*y += 64;
-		data->map[*y / 64][*x / 64] = 'p';
+	check_pos(data);
+	data->map[*y / 64][*x / 64] = 'p';
+	if (data->end == 0)
 		world_init(data);
-	}
 }
 
 int	input(int key, void *param)
 {
 	char	**map;
 	t_data	*data;
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	data = param;
 	map = data->map;
@@ -118,17 +63,16 @@ int	input(int key, void *param)
 	if (key == ESCAPE)
 		clean_exit(param, 0);
 	if (key == W_KEY && map[y - 1][x] != '1' && data->end == 0
-		&& (map[y - 1][x] != 'e' || data->exit == 1))
+		&& (map[y - 1][x] != 'e' || data->obj == 0))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 1);
 	if (key == D_KEY && map[y][x + 1] != '1' && data->end == 0
-		&& (map[y][x + 1] != 'e' || data->exit == 1))
+		&& (map[y][x + 1] != 'e' || data->obj == 0))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 2);
 	if (key == A_KEY && map[y][x - 1] != '1' && data->end == 0
-		&& (map[y][x - 1] != 'e' || data->exit == 1))
+		&& (map[y][x - 1] != 'e' || data->obj == 0))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 3);
 	if (key == S_KEY && map[y + 1][x] != '1' && data->end == 0
-		&& (map[y + 1][x] != 'e' || data->exit == 1))
+		&& (map[y + 1][x] != 'e' || data->obj == 0))
 		moving(data, &data->player.pos_x, &data->player.pos_y, 4);
-	check_pos(data);
 	return (1);
 }

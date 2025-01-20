@@ -6,13 +6,11 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:01:12 by secros            #+#    #+#             */
-/*   Updated: 2025/01/09 08:59:52 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 13:32:54 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-static int	confirm(t_data *data, int key);
 
 static int	set_input(int key, t_data *data)
 {
@@ -64,20 +62,21 @@ static void	setting(t_data *data, t_pict *load)
 		data->w_size[1] = 66;
 	draw_cursor(load, 30, data->w_size[1]);
 	mlx_put_image_to_window(data->mlx, data->win, load->img, 0, 0);
-	mlx_hook(data->win, DestroyNotify, 0, confirm, data);
+	mlx_hook(data->win, DestroyNotify, 0, quit, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, set_input, data);
 }
 
-static int	confirm(t_data *data, int key)
+int	confirm(t_data *data, int error)
 {
-	if (data->w_size[1] == 390 || key == 371)
+	if (data->w_size[1] == 390)
 	{
 		if (data->load->img)
 			mlx_destroy_image(data->mlx, data->load->img);
 		mlx_destroy_window(data->mlx, data->win);
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
-		exit(0);
+		free_the_mallocs(data->map);
+		exit(error);
 	}
 	if (data->w_size[1] == 265)
 		setting(data, data->load);
@@ -137,7 +136,7 @@ void	loading_screen(t_data *data, t_pict *load)
 	data->w_size[0] = 30;
 	data->w_size[1] = 110;
 	mlx_put_image_to_window(data->mlx, data->win, load->img, 0, 0);
-	mlx_hook(data->win, DestroyNotify, 0, confirm, data);
+	mlx_hook(data->win, DestroyNotify, 0, quit, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, load_input, data);
 	mlx_loop(data->mlx);
 }

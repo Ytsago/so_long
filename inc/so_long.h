@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/10 10:54:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/20 13:37:12 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 // sprite
 # define WALL "./sprite/wall.xpm"
 # define WALL2 "./sprite/wall2.xpm"
-# define PLAYER "./sprite/player.xpm"
+# define PLAYER "./sprite/play.xpm"
 # define OBJ "./sprite/obj.xpm"
 # define CEXIT "./sprite/door.xpm"
+# define OEXIT "./sprite/door_o.xpm"
 # define TILE "./sprite/tile.xpm"
-# define GATO "./sprite/end.xpm"
+# define END "./sprite/end.xpm"
 
 // key map
 # define W_KEY 119
@@ -40,16 +41,17 @@
 # include "mlx_int.h"
 # include "libft.h"
 # include "ft_printf.h"
- typedef struct	s_pict
+
+typedef struct s_pict
 {
 	void	*img;
 	char	*addr;
 	int		bytes;
 	int		l_len;
 	int		endian;
-}			t_pict;
+}	t_pict;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	t_pict	wall;
 	t_pict	wall2;
@@ -58,8 +60,8 @@ typedef struct	s_sprite
 	t_pict	play;
 	t_pict	c_ex;
 	t_pict	o_ex;
-	t_pict	gato;
-}			t_sprite;
+	t_pict	end;
+}	t_sprite;
 
 typedef struct s_entity
 {
@@ -67,8 +69,8 @@ typedef struct s_entity
 	int				pos_x;
 	int				pos_y;
 	int				life;
-	struct s_entity *next;
-}				t_entity;
+	struct s_entity	*next;
+}	t_entity;
 
 typedef struct s_data
 {
@@ -76,11 +78,10 @@ typedef struct s_data
 	t_sprite	sprite;
 	t_pict		*load;
 	char		**map;
-	char		*path;
 	void		*mlx;
 	void		*win;
-	int			exit;
 	int			end;
+	int			obj;
 	int			w_size[2];
 	int			move;
 	int			set;
@@ -89,24 +90,28 @@ typedef struct s_data
 //settings
 void	loading_screen(t_data *data, t_pict *load);
 int		launch(t_data *data);
+void	load_asset(t_data *data);
+int		confirm(t_data *data, int error);
 
 //image and screem rendering
 void	draw_cursor(t_pict *img, int x, int y);
+void	resolution(t_data *data);
 void	erease_cursor(t_pict *img, int x, int y);
 
 //map_parsing
-int	map_parsing(t_data *data, char *path);
-int	check_map(char **map);
-int	check_data(t_data *data, char **map);
-int	all_access(t_data *data, char **map);
+int		map_parsing(t_data *data, char *path);
+int		check_map(char **map);
+int		check_data(t_data *data, char **map);
+int		all_access(t_data *data, char **map);
 
 //input and moving
 int		input(int key, void *param);
 void	end_game(t_data *data);
 int		clean_exit(t_data *data, int error);
+int		close_button(t_data *data);
+int		quit(t_data *data);
 
 //generate world
 void	world_init(t_data *data);
-//void	draw_tiles(t_data *data, void *img, int x[2], int y[2]);
 
 #endif
