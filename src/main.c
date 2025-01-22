@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:57:45 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/22 18:24:00 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ void	end_game(t_data *data)
 	mlx_put_image_to_window(pt[0], pt[1], pt[2], x, y);
 }
 
+int	rendering(t_data *param)
+{
+	if (param->end == 0)
+		world_init(param);
+	return (1);
+}
+
 int	launch(t_data *data)
 {
 	int			x;
@@ -58,6 +65,7 @@ int	launch(t_data *data)
 	y = 0;
 	data_init(data);
 	world_init(data);
+	mlx_loop_hook(data->mlx, rendering, data);
 	mlx_hook(data->win, KeyPress, KeyPressMask, input, data);
 	mlx_hook(data->win, DestroyNotify, 0, close_button, data);
 	mlx_loop(data->mlx);
@@ -82,9 +90,13 @@ int	main(int ac, char **av)
 		write (2, "Error\n failed to create mlx_ptr", 31);
 		return (1);
 	}
-	data.win = NULL;//mlx_new_window(data.mlx, 400, 500, TITLE);
+	data.win = mlx_new_window(data.mlx, 400, 500, TITLE);
 	if (!data.win)
-		//trouver une meilleur solution
+	{
+		mlx_destroy_display(data.mlx);
+		free (data.mlx);
+		return ((void) write (2, "Error\nCan't create window", 25), 1);
+	}
 	data.set = 0;
 	loading_screen(&data, &load);
 }

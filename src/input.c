@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:23:32 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/21 22:46:25 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static void	moving(t_data *data, int *x, int *y, int dir)
 		*y += 64;
 	check_pos(data);
 	data->map[*y / 64][*x / 64] = 'p';
-	if (data->end == 0)
-		world_init(data);
 }
 
 int	input(int key, void *param)

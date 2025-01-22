@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:37:12 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/22 18:24:33 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define OEXIT "./sprite/door_o.xpm"
 # define TILE "./sprite/tile.xpm"
 # define END "./sprite/end.xpm"
+# define PLAY_L "./sprite/l_play.xpm"
+# define PLAY_R "./sprite/r_play.xpm"
+# define PLAY_D "./sprite/d_play.xpm"
+# define PLAY_U "./sprite/u_play.xpm"
+# define ANIM1 "./sprite/player animation/I_play1.xpm"
+# define ANIM2 "./sprite/player animation/I_play2.xpm"
+# define ANIM3 "./sprite/player animation/I_play3.xpm"
 
 // key map
 # define W_KEY 119
