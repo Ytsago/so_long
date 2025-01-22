@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 LFLAGS = -lbsd -lX11 -lm -lXext
 CC = cc
 AR = ar
