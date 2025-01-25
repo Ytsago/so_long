@@ -6,11 +6,18 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 09:53:20 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:38:27 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	rendering(t_data *param)
+{
+	if (param->end == 0)
+		world_init(param);
+	return (1);
+}
 
 static int	is_path(int x, int y, char **map)
 {

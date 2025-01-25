@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/22 18:29:30 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:38:00 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ static void	data_init(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
-		clean_exit(data, 1);
+	{
+		write (2, "Error\nSomething went wrong", 26);
+		free_the_mallocs(data->map);
+		exit(1);
+	}
 	data->move = 1;
 	data->end = 0;
 	resolution(data);
@@ -49,11 +53,16 @@ void	end_game(t_data *data)
 	mlx_put_image_to_window(pt[0], pt[1], pt[2], x, y);
 }
 
-int	rendering(t_data *param)
+void	asset_init(t_sprite *sprt)
 {
-	if (param->end == 0)
-		world_init(param);
-	return (1);
+	sprt->c_ex.img = NULL;
+	sprt->o_ex.img = NULL;
+	sprt->obj.img = NULL;
+	sprt->play.img = NULL;
+	sprt->tile.img = NULL;
+	sprt->wall.img = NULL;
+	sprt->wall2.img = NULL;
+	sprt->end.img = NULL;
 }
 
 int	launch(t_data *data)
@@ -63,6 +72,7 @@ int	launch(t_data *data)
 
 	x = 0;
 	y = 0;
+	asset_init(&data->sprite);
 	data_init(data);
 	world_init(data);
 	mlx_loop_hook(data->mlx, rendering, data);

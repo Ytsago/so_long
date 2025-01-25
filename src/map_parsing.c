@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 13:24:57 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:38:51 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static char	**read_map(int fd)
 		str = get_next_line(fd);
 		count++;
 	}
+	close(fd);
 	return (map);
 }
 

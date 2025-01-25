@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/22 18:43:56 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/26 00:33:54 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int		close_button(t_data *data);
 int		quit(t_data *data);
 
 //generate world
+int		rendering(t_data *param);
 void	world_init(t_data *data);
 
 #endif
