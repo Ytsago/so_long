@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/01/26 00:38:51 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/27 17:27:10 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static char	**read_map(int fd)
 		str = get_next_line(fd);
 		count++;
 	}
-	close(fd);
 	return (map);
 }
 
@@ -71,6 +70,7 @@ static int	check_condition(t_data *data, char *path)
 	i = 0;
 	fd = open(path, O_RDONLY);
 	map = read_map(fd);
+	close(fd);
 	if (!map)
 		return (1);
 	if (check_map(map))
