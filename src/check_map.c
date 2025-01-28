@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/26 00:29:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/27 18:53:44 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int	check_data(t_data *data, char **map)
 				count++;
 		}
 	}
-	if (data->obj > 0 && count == 1)
+	if (data->obj > 0 && count == 1 && data->player.pos_x > 0 \
+		&& data->player.pos_y > 0)
 		return (0);
 	return (1);
 }
