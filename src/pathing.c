@@ -6,16 +6,30 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/01/26 00:38:27 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/30 15:12:23 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	rendering(t_data *param)
+int	rendering(t_data *data)
 {
-	if (param->end == 0)
-		world_init(param);
+	char	*str;
+	char	*step;
+
+	if (data->end == 0)
+	{
+		world_init(data);
+		step = ft_itoa(data->move);
+		if (!step)
+			clean_exit(data, 1);
+		str = ft_strjoin("Step :", step);
+		free (step);
+		if (!str)
+			return (clean_exit(data, 1));
+		mlx_string_put(data->mlx, data->win, 15, 15, 0, str);
+		free (str);
+	}
 	return (1);
 }
 

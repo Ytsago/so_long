@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/01/21 22:46:25 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/30 15:04:36 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ static void	check_pos(t_data *data)
 
 static void	moving(t_data *data, int *x, int *y, int dir)
 {
+	data->move++;
 	data->map[*y / 64][*x / 64] = '2';
-	ft_printf("move :%d\n", data->move++);
+	ft_printf("move :%d\n", data->move);
 	if (dir == 1)
 		*y -= 64;
 	else if (dir == 2)

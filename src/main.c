@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/26 00:38:00 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/30 15:52:22 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	data_init(t_data *data)
 		free_the_mallocs(data->map);
 		exit(1);
 	}
-	data->move = 1;
+	data->move = 0;
 	data->end = 0;
 	resolution(data);
 	data->win = mlx_new_window(data->mlx, data->w_size[0], \
