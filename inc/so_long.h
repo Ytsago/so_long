@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/01/26 00:33:54 by secros           ###   ########.fr       */
+/*   Updated: 2025/01/30 16:09:41 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		launch(t_data *data);
 void	load_asset(t_data *data);
 int		confirm(t_data *data, int error);
 
-//image and screem rendering
+//image and screen rendering
 void	draw_cursor(t_pict *img, int x, int y);
 void	resolution(t_data *data);
 void	erease_cursor(t_pict *img, int x, int y);
