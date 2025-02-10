@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/01/30 15:52:22 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/05 20:06:02 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	data_init(t_data *data)
 
 void	end_game(t_data *data)
 {
-	int		x;
-	int		y;
+	size_t		x;
+	size_t		y;
 	void	*pt[4];
 
 	x = data->w_size[0] / 2 - 450;
@@ -43,12 +43,7 @@ void	end_game(t_data *data)
 	pt[0] = data->mlx;
 	pt[1] = data->win;
 	pt[2] = data->sprite.end.img;
-	pt[3] = mlx_new_image(pt[0], data->w_size[0], data->w_size[1]);
-	if (pt[3])
-	{
-		mlx_put_image_to_window(pt[0], pt[1], pt[3], 0, 0);
-		mlx_destroy_image(pt[0], pt[3]);
-	}
+	mlx_clear_window(data->mlx, data->win);
 	data->end = 1;
 	mlx_put_image_to_window(pt[0], pt[1], pt[2], x, y);
 }
@@ -67,11 +62,6 @@ void	asset_init(t_sprite *sprt)
 
 int	launch(t_data *data)
 {
-	int			x;
-	int			y;
-
-	x = 0;
-	y = 0;
 	asset_init(&data->sprite);
 	data_init(data);
 	world_init(data);

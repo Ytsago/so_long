@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/02/04 13:06:02 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:45:41 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	rendering(t_data *data)
 	return (1);
 }
 
-static int	is_path(int x, int y, char **map)
+static int	is_path(size_t x, size_t y, char **map)
 {
 	if (map[y][x] >= 'A' && map[y][x] <= 'Z')
 	{
@@ -50,7 +50,7 @@ static int	is_path(int x, int y, char **map)
 	return (0);
 }
 
-static void	pathing(int x, int y, char **map)
+static void	pathing(size_t x, size_t y, char **map)
 {
 	if (is_path(x + 1, y, map))
 		pathing(x + 1, y, map);
@@ -64,8 +64,8 @@ static void	pathing(int x, int y, char **map)
 
 int	all_access(t_data *data, char **map)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	j = 0;
 	pathing(data->player.pos_x / 64, data->player.pos_y / 64, map);

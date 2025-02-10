@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/01/20 11:21:42 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/05 20:00:01 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	erease_cursor(t_pict *img, int x, int y)
 	}
 }
 
-static void	draw_tiles(t_data *data, int x[2], int y[2])
+static void	draw_tiles(t_data *data, size_t x[2], size_t y[2])
 {
 	t_pict	*img;
 
@@ -77,10 +77,10 @@ static void	draw_tiles(t_data *data, int x[2], int y[2])
 		data->win, img->img, x[0] * 64, y[0] * 64);
 }
 
-static void	draw_world(t_data *data, int i, int j)
+static void	draw_world(t_data *data, size_t i, size_t j)
 {
-	int			y[2];
-	int			x[2];
+	size_t			y[2];
+	size_t			x[2];
 
 	y[0] = 0;
 	y[1] = y[0] + j;
@@ -108,14 +108,14 @@ void	world_init(t_data *data)
 	j = data->w_size[1] / 128;
 	i = data->player.pos_x / 64 - i;
 	if (data->player.pos_x / 64 + data->w_size[0] / 128 > \
-		(int) ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0))
+		ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0))
 		i = ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0) \
 			- data->w_size[0] / 64;
 	if (i < 0)
 		i = 0;
 	j = data->player.pos_y / 64 - j;
 	if (data->player.pos_y / 64 + data->w_size[1] / 128 > \
-		(int) ft_tablen(data->map) - 1)
+		ft_tablen(data->map) - 1)
 		j = ft_tablen(data->map) - 1 + (data->w_size[0] % 128 != 0) + \
 			(data->w_size[1] % 128 == 112) - data->w_size[1] / 64;
 	if (j < 0)

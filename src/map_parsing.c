@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/02/04 13:43:55 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:40:26 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static char	**new_line(char **map, char *str, int count)
 {
 	char	**new;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	new = malloc(sizeof(char *) * (count + 1));
@@ -43,7 +43,7 @@ static char	**read_map(int fd)
 {
 	char	*str;
 	char	**map;
-	int		count;
+	size_t	count;
 
 	count = 1;
 	str = get_next_line(fd);
@@ -64,17 +64,16 @@ static char	**read_map(int fd)
 static int	check_condition(t_data *data, char *path)
 {
 	int		fd;
-	int		i;
 	char	*ext_check;
 	char	**map;
 
-	i = 0;
 	fd = open(path, O_RDONLY);
 	ext_check = ft_strnstr(path, ".ber", ft_strlen(path));
 	if (!ext_check || ext_check[4] != '\0')
 		return (5);
 	map = read_map(fd);
-	close(fd);
+	if (fd > 0)
+		close(fd);
 	if (!map)
 		return (1);
 	if (check_map(map))

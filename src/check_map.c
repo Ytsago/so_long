@@ -6,15 +6,15 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/01/30 15:51:47 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/05 19:42:15 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	check_ex_row(char *str)
+size_t	check_ex_row(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -26,9 +26,9 @@ int	check_ex_row(char *str)
 	return (i);
 }
 
-static int	check_line(char *str)
+static size_t	check_line(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (str[i++] != '1')
@@ -48,8 +48,8 @@ static int	check_line(char *str)
 
 int	check_map(char **map)
 {
-	int	len;
-	int	i;
+	size_t	len;
+	size_t	i;
 
 	i = 1;
 	len = check_ex_row(map[0]);
@@ -76,8 +76,8 @@ static int	set_player(t_data *data, int x, int y)
 
 int	check_data(t_data *data, char **map)
 {
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 	int		count;
 
 	j = 0;
