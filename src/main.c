@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 20:06:02 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:36:54 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	end_game(t_data *data)
 {
 	size_t		x;
 	size_t		y;
-	void	*pt[4];
+	void		*pt[4];
 
 	x = data->w_size[0] / 2 - 450;
 	y = data->w_size[1] / 2 - 350;

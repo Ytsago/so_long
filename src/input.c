@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:22:00 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 19:47:42 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:37:02 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	moving(t_data *data, size_t *x, size_t *y, int dir)
 
 int	input(int key, void *param)
 {
-	char	**map;
-	t_data	*data;
+	char		**map;
+	t_data		*data;
 	size_t		x;
 	size_t		y;
 

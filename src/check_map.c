@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 19:42:15 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:37:13 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	check_data(t_data *data, char **map)
 {
 	size_t		i;
 	size_t		j;
-	int		count;
+	int			count;
 
 	j = 0;
 	count = 0;
