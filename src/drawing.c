@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 20:00:01 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:19:33 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ static void	draw_tiles(t_data *data, size_t x[2], size_t y[2])
 		img = &data->sprite.wall;
 	if (data->map[y[1]][x[1]] == '2' || data->map[y[1]][x[1]] == '0')
 		img = &data->sprite.tile;
-	if (data->map[y[1]][x[1]] == 'e' && data->obj > 0)
+	if (data->map[y[1]][x[1]] == 'e' && data->engine.obj > 0)
 		img = &data->sprite.c_ex;
-	if (data->map[y[1]][x[1]] == 'e' && data->obj == 0)
+	if (data->map[y[1]][x[1]] == 'e' && data->engine.obj == 0)
 		img = &data->sprite.o_ex;
 	if (data->map[y[1]][x[1]] == 'c')
 		img = &data->sprite.obj;
 	if (data->map[y[1] + 1] && data->map[y[1] + 1][x[1]] == '1'
 		&& data->map[y[1]][x[1]] == '1')
 		img = &data->sprite.wall2;
-	mlx_put_image_to_window(data->mlx, \
-		data->win, img->img, x[0] * 64, y[0] * 64);
+	mlx_put_image_to_window(data->mlx_info.mlx, \
+		data->mlx_info.win, img->img, x[0] * 64, y[0] * 64);
 }
 
 static void	draw_world(t_data *data, size_t i, size_t j)
@@ -84,11 +84,11 @@ static void	draw_world(t_data *data, size_t i, size_t j)
 
 	y[0] = 0;
 	y[1] = y[0] + j;
-	while (y[0] <= data->w_size[1] / 64 && data->map[y[1]])
+	while (y[0] <= data->mlx_info.w_size[1] / 64 && data->map[y[1]])
 	{
 		x[0] = 0;
 		x[1] = x[0] + i;
-		while (x[0] <= data->w_size[0] + 1 / 64 && data->map[y[1]][x[1]])
+		while (x[0] <= data->mlx_info.w_size[0] + 1 / 64 && data->map[y[1]][x[1]])
 		{
 			draw_tiles(data, x, y);
 			x[1]++;
@@ -104,20 +104,20 @@ void	world_init(t_data *data)
 	int	i;
 	int	j;
 
-	i = data->w_size[0] / 128;
-	j = data->w_size[1] / 128;
-	i = data->player.pos_x / 64 - i;
-	if (data->player.pos_x / 64 + data->w_size[0] / 128 > \
-		ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0))
-		i = ft_strlen(data->map[0]) - 2 + (data->w_size[0] % 128 == 0) \
-			- data->w_size[0] / 64;
+	i = data->mlx_info.w_size[0] / 128;
+	j = data->mlx_info.w_size[1] / 128;
+	i = data->player.pos.x / 64 - i;
+	if (data->player.pos.x / 64 + data->mlx_info.w_size[0] / 128 > \
+		ft_strlen(data->map[0]) - 2 + (data->mlx_info.w_size[0] % 128 == 0))
+		i = ft_strlen(data->map[0]) - 2 + (data->mlx_info.w_size[0] % 128 == 0) \
+			- data->mlx_info.w_size[0] / 64;
 	if (i < 0)
 		i = 0;
-	j = data->player.pos_y / 64 - j;
-	if (data->player.pos_y / 64 + data->w_size[1] / 128 > \
+	j = data->player.pos.y / 64 - j;
+	if (data->player.pos.y / 64 + data->mlx_info.w_size[1] / 128 > \
 		ft_tablen(data->map) - 1)
-		j = ft_tablen(data->map) - 1 + (data->w_size[0] % 128 != 0) + \
-			(data->w_size[1] % 128 == 112) - data->w_size[1] / 64;
+		j = ft_tablen(data->map) - 1 + (data->mlx_info.w_size[0] % 128 != 0) + \
+			(data->mlx_info.w_size[1] % 128 == 112) - data->mlx_info.w_size[1] / 64;
 	if (j < 0)
 		j = 0;
 	draw_world(data, i, j);

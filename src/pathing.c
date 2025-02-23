@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:06:09 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 19:45:41 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:16:39 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int	rendering(t_data *data)
 	char	*str;
 	char	*step;
 
-	if (data->end == 0)
+	if (data->engine.end == 0)
 	{
 		world_init(data);
-		step = ft_itoa(data->move);
+		step = ft_itoa(data->engine.move);
 		if (!step)
 			clean_exit(data, 1);
 		str = ft_strjoin("Step :", step);
 		free (step);
 		if (!str)
 			return (clean_exit(data, 1));
-		mlx_string_put(data->mlx, data->win, 15, 15, 0, str);
+		mlx_string_put(data->mlx_info.mlx, data->mlx_info.win, 15, 15, 0, str);
 		free (str);
 	}
 	return (1);
@@ -68,7 +68,7 @@ int	all_access(t_data *data, char **map)
 	size_t	j;
 
 	j = 0;
-	pathing(data->player.pos_x / 64, data->player.pos_y / 64, map);
+	pathing(data->player.pos.x / 64, data->player.pos.y / 64, map);
 	while (map[j])
 	{
 		i = 0;

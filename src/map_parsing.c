@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 19:40:26 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:16:48 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	map_parsing(t_data *data, char *path)
 {
 	int	error;
 
-	data->player.pos_x = 0;
-	data->player.pos_y = 0;
+	data->player.pos.x = 0;
+	data->player.pos.y = 0;
 	error = check_condition(data, path);
 	if (error)
 	{

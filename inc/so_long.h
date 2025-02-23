@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/02/05 19:56:04 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:20:06 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,20 @@
 # include "libft.h"
 # include "ft_printf.h"
 
+enum e_type
+{
+	PLAY,
+	ENEMY,
+};
+
+enum e_render
+{
+	LOW,
+	MEDIUM,
+	HIGH,
+	MAX,
+};
+
 typedef struct s_pict
 {
 	void	*img;
@@ -63,28 +77,46 @@ typedef struct s_sprite
 	t_pict	end;
 }	t_sprite;
 
+typedef struct s_vect
+{
+	int	x;
+	int	y;
+}	t_vect;
+
 typedef struct s_entity
 {
 	int				type;
-	size_t			pos_x;
-	size_t			pos_y;
+	t_vect			pos;
 	int				life;
 	struct s_entity	*next;
 }	t_entity;
+
+typedef struct s_engine
+{
+	int	key;
+	int	jump;
+	int	end;
+	int	obj;
+	int	move;
+	int	set;
+}	t_engine;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	size_t	w_size[2];
+}	t_mlx;
+
 
 typedef struct s_data
 {
 	t_entity	player;
 	t_sprite	sprite;
 	t_pict		*load;
+	t_mlx		mlx_info;
+	t_engine	engine;
 	char		**map;
-	void		*mlx;
-	void		*win;
-	int			end;
-	int			obj;
-	size_t		w_size[2];
-	int			move;
-	int			set;
 }		t_data;
 
 //settings

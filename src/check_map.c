@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/02/10 15:23:20 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:19:52 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	check_map(char **map)
 
 static int	set_player(t_data *data, int x, int y)
 {
-	if (data->player.pos_x == 0 && data->player.pos_y == 0)
+	if (data->player.pos.x == 0 && data->player.pos.y == 0)
 	{
-		data->player.pos_x = x * 64;
-		data->player.pos_y = y * 64;
+		data->player.pos.x = x * 64;
+		data->player.pos.y = y * 64;
 		return (0);
 	}
 	return (1);
@@ -82,7 +82,7 @@ int	check_data(t_data *data, char **map)
 
 	j = 0;
 	count = 0;
-	data->obj = 0;
+	data->engine.obj = 0;
 	while (map[++j])
 	{
 		i = 0;
@@ -92,13 +92,13 @@ int	check_data(t_data *data, char **map)
 				if (set_player(data, i, j))
 					return (1);
 			if (map[j][i] == 'C')
-				data->obj++;
+				data->engine.obj++;
 			if (map[j][i] == 'E')
 				count++;
 		}
 	}
-	if (data->obj > 0 && count == 1 && data->player.pos_x > 0 \
-		&& data->player.pos_y > 0)
+	if (data->engine.obj > 0 && count == 1 && data->player.pos.x > 0 \
+		&& data->player.pos.y > 0)
 		return (0);
 	return (1);
 }
