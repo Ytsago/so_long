@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 14:20:49 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:19:33 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:29:57 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static void	draw_world(t_data *data, size_t i, size_t j)
 	{
 		x[0] = 0;
 		x[1] = x[0] + i;
-		while (x[0] <= data->mlx_info.w_size[0] + 1 / 64 && data->map[y[1]][x[1]])
+		while (x[0] <= data->mlx_info.w_size[0] + 1 \
+		/ 64 && data->map[y[1]][x[1]])
 		{
 			draw_tiles(data, x, y);
 			x[1]++;
@@ -115,9 +116,9 @@ void	world_init(t_data *data)
 		i = 0;
 	j = data->player.pos.y / 64 - j;
 	if (data->player.pos.y / 64 + data->mlx_info.w_size[1] / 128 > \
-		ft_tablen(data->map) - 1)
+	ft_tablen(data->map) - 1)
 		j = ft_tablen(data->map) - 1 + (data->mlx_info.w_size[0] % 128 != 0) + \
-			(data->mlx_info.w_size[1] % 128 == 112) - data->mlx_info.w_size[1] / 64;
+		(data->mlx_info.w_size[1] % 128 == 112) - data->mlx_info.w_size[1] / 64;
 	if (j < 0)
 		j = 0;
 	draw_world(data, i, j);

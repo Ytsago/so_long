@@ -14,7 +14,7 @@ RESET  = \033[0m
 CFILE =	main.c
 
 FILE =	main.c check_map.c map_parsing.c pathing.c drawing.c input.c setting.c \
-		event.c loading.c
+		event.c loading.c setting_change.c
 
 LIB_D = libft/
 

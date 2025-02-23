@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:12:07 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:30:28 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	data_init(t_data *data)
 	data->engine.move = 0;
 	data->engine.end = 0;
 	resolution(data);
-	data->mlx_info.win = mlx_new_window(data->mlx_info.mlx, data->mlx_info.w_size[0], \
-		data->mlx_info.w_size[1], TITLE);
+	data->mlx_info.win = mlx_new_window(data->mlx_info.mlx, \
+	data->mlx_info.w_size[0], data->mlx_info.w_size[1], TITLE);
 	if (!data->mlx_info.win)
 		clean_exit(data, 1);
 	load_asset(data);

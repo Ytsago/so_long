@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:01:12 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:11:37 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 10:49:06 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	set_input(int key, t_data *data)
 {
-	erease_cursor(data->load, data->mlx_info.w_size[0], data->mlx_info.w_size[1]);
+	erease_cursor(data->load, data->mlx_info.w_size[0], \
+	data->mlx_info.w_size[1]);
 	if (key == W_KEY)
 		if (data->mlx_info.w_size[1] > 66)
 			data->mlx_info.w_size[1] -= 100;
 	if (key == S_KEY)
 		if (data->mlx_info.w_size[1] < 366)
 			data->mlx_info.w_size[1] += 100;
-	draw_cursor(data->load, data->mlx_info.w_size[0], data->mlx_info.w_size[1]);
-	mlx_put_image_to_window(data->mlx_info.mlx, data->mlx_info.win, data->load->img, 0, 0);
+	change_selection(data);
 	if (key == ENTER)
 	{
 		data->engine.set = data->mlx_info.w_size[1] / 100;
@@ -50,18 +50,10 @@ static void	setting(t_data *data, t_pict *load)
 	load->addr = mlx_get_data_addr(load->img, &load->bytes, \
 	&load->l_len, &load->endian);
 	data->mlx_info.w_size[0] = 30;
-	if (data->engine.set == LOW)
-		data->mlx_info.w_size[1] = 66;
-	else if (data->engine.set == MEDIUM)
-		data->mlx_info.w_size[1] = 166;
-	else if (data->engine.set == HIGH)
-		data->mlx_info.w_size[1] = 266;
-	else if (data->engine.set == MAX)
-		data->mlx_info.w_size[1] = 366;
-	else
-		data->mlx_info.w_size[1] = 66;
+	change_resolution(data);
 	draw_cursor(load, 30, data->mlx_info.w_size[1]);
-	mlx_put_image_to_window(data->mlx_info.mlx, data->mlx_info.win, load->img, 0, 0);
+	mlx_put_image_to_window(data->mlx_info.mlx, \
+	data->mlx_info.win, load->img, 0, 0);
 	mlx_hook(data->mlx_info.win, DestroyNotify, 0, quit, data);
 	mlx_hook(data->mlx_info.win, KeyPress, KeyPressMask, set_input, data);
 }
@@ -94,7 +86,8 @@ int	confirm(t_data *data, int error)
 
 static int	load_input(int key, t_data *data)
 {
-	erease_cursor(data->load, data->mlx_info.w_size[0], data->mlx_info.w_size[1]);
+	erease_cursor(data->load, data->mlx_info.w_size[0], \
+	data->mlx_info.w_size[1]);
 	if (key == W_KEY)
 	{
 		if (data->mlx_info.w_size[1] == 390)
@@ -109,8 +102,7 @@ static int	load_input(int key, t_data *data)
 		else if (data->mlx_info.w_size[1] == 265)
 			data->mlx_info.w_size[1] = 390;
 	}
-	draw_cursor(data->load, data->mlx_info.w_size[0], data->mlx_info.w_size[1]);
-	mlx_put_image_to_window(data->mlx_info.mlx, data->mlx_info.win, data->load->img, 0, 0);
+	change_selection(data);
 	if (key == ENTER)
 		confirm(data, 0);
 	if (key == ESCAPE)
@@ -135,7 +127,8 @@ void	loading_screen(t_data *data, t_pict *load)
 	draw_cursor(load, 30, 110);
 	data->mlx_info.w_size[0] = 30;
 	data->mlx_info.w_size[1] = 110;
-	mlx_put_image_to_window(data->mlx_info.mlx, data->mlx_info.win, load->img, 0, 0);
+	mlx_put_image_to_window(data->mlx_info.mlx, \
+	data->mlx_info.win, load->img, 0, 0);
 	mlx_hook(data->mlx_info.win, DestroyNotify, 0, quit, data);
 	mlx_hook(data->mlx_info.win, KeyPress, KeyPressMask, load_input, data);
 	mlx_loop(data->mlx_info.mlx);
