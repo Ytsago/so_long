@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:45:18 by secros           ###   ########.fr       */
+/*   Updated: 2025/02/23 17:21:56 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef struct s_mlx
 	void	*win;
 	size_t	w_size[2];
 }	t_mlx;
-
 
 typedef struct s_data
 {
