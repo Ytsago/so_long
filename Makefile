@@ -16,13 +16,16 @@ CFILE =	main.c
 FILE =	main.c check_map.c map_parsing.c pathing.c drawing.c input.c setting.c \
 		event.c loading.c setting_change.c game_loop.c color_util.c
 
+BFILE =	main_bonus.c check_map_bonus.c map_parsing_bonus.c pathing_bonus.c drawing_bonus.c input_bonus.c setting_bonus.c \
+		event_bonus.c loading_bonus.c setting_change_bonus.c game_loop_bonus.c color_util_bonus.c
+
 LIB_D = libft/
 
 MLX_D = minilibx-linux/
 
 LIB = $(LIB_D)libft.a $(MLX_D)libmlx.a $(MLX_D)libmlx_Linux.a
 
-CSRCDIR = src_bonus/
+BDIR = bonus/
 
 SRCDIR = src/
 
@@ -36,13 +39,15 @@ OBJDIR = .Obj/
 
 OBJS = $(FILE:%.c=$(OBJDIR)%.o)
 
+BOBJS = $(BFILE:%.c=$(OBJDIR)%.o)
+
 NAME = so_long
 
-all: $(NAME) Makefile
+all: lib $(NAME) Makefile
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 	@echo "$(YELLOW)Creating final product : $(BLUE)$@...$(RESET)"
-	@$(CC) $(CFLAGS) $(LFLAGS) $^ $(LIB) -o $@ && echo "$(GREEN)$@ Created successfully !$(RESET)"
+	@$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LIB) -o $@ && echo "$(GREEN)$@ Created successfully !$(RESET)"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(LIB) $(INCDIR)$(INC) | $(OBJDIR)
 	$(CC) -c $(CFLAGS) -I $(INCDIR) -I $(MLX_D) -I $(LIB_D)$(INCDIR) $< -o $@
@@ -51,10 +56,12 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 	@echo "$(YELLOW)Compiling...$(RESET)"
 
-$(LIB): FORCE
-	@$(MAKE) -C $(LIB_D) --no-print-directory
-	@$(MAKE) -C $(MLX_D) --no-print-directory
+lib:
+	@$(MAKE) -C $(LIB_D) --no-print-directory MAKEOVERRIDEN=
+	@$(MAKE) -C $(MLX_D) --no-print-directory MAKEOVERRIDEN=
 
+bonus: lib
+	@$(MAKE) FILE="$(BFILE)" SRCDIR="$(BDIR)" --no-print-directory
 
 clean:
 	@echo "$(RED)Deleting object files...$(RESET)"
@@ -71,4 +78,4 @@ re: fclean all
 
 FORCE:
 
-.PHONY: clean fclean re all bonus
+.PHONY: clean fclean re all bonus lib
