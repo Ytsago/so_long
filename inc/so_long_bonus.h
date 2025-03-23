@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 16:18:31 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/23 17:57:54 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define MAX_VELOCITY 15
 # define FRICTION 0.30
 # define ASSET 64
-# define FRAME_RATE 1000000 / 60
+# define FRAME_RATE 16667 // 1000000 / 60
 # define FRAME_SPEED 10
 # define AGGRO 640
 # define E_SPEED 4
@@ -92,14 +92,14 @@ enum e_anim
 };
 
 //Typedef usefull stuct
-typedef struct	s_vect		t_vect;
-typedef struct	s_hitbox	t_hitbox;
-typedef struct	s_pict		t_pict;
-typedef struct	s_sprite	t_sprite;
-typedef struct	s_entity	t_entity;
-typedef struct	s_engine	t_engine;
-typedef struct	s_mlx		t_mlx;
-typedef struct	s_data		t_data;
+typedef struct s_vect		t_vect;
+typedef struct s_hitbox		t_hitbox;
+typedef struct s_pict		t_pict;
+typedef struct s_sprite		t_sprite;
+typedef struct s_entity		t_entity;
+typedef struct s_engine		t_engine;
+typedef struct s_mlx		t_mlx;
+typedef struct s_data		t_data;
 
 //struct for position and movement
 struct s_vect
@@ -165,7 +165,7 @@ struct s_engine
 	int				set;
 	char			frame;
 	struct timeval	time;
-	t_pict	screen;
+	t_pict			screen;
 };
 
 //Enssentiel pointer to the mlx element
@@ -240,7 +240,6 @@ void	check_pos(t_data *data);
 //draw_player
 void	select_frame(t_data *data, t_pict *sprt);
 void	merge_image(t_pict screen, t_pict *img, t_data *data, int frame);
-
 
 //generate world
 int		game_loop(t_data *param);
