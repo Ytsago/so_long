@@ -33,7 +33,10 @@ BSRCS = $(BDIR)$(BFILE)
 
 INCDIR = inc/
 
-INC = 
+INC = so_long.h 
+
+BINC = so_long_bonus.h
+
 
 OBJDIR = .Obj/
 
@@ -58,7 +61,7 @@ $(BNAME): $(BOBJS)
 $(OBJDIR)%.o: $(SRCDIR)%.c $(LIB) $(INCDIR)$(INC) | $(OBJDIR)
 	$(CC) -c $(CFLAGS) -I $(INCDIR) -I $(MLX_D) -I $(LIB_D)$(INCDIR) $< -o $@
 
-$(OBJDIR)%.o: $(BDIR)%.c $(LIB) $(INCDIR)$(INC) | $(OBJDIR)
+$(OBJDIR)%.o: $(BDIR)%.c $(LIB) $(INCDIR)$(BINC) | $(OBJDIR)
 	$(CC) -c $(CFLAGS) -I $(INCDIR) -I $(MLX_D) -I $(LIB_D)$(INCDIR) $< -o $@
 
 $(OBJDIR):

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:12:34 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 16:17:36 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/23 18:14:05 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	*create_monster(t_data *data, t_vect pos)
 	monster->pos = (t_vect){pos.x * ASSET, pos.y * ASSET};
 	monster->type = ENEMY;
 	monster->life = 1;
-	monster->hitbox.top = (t_vect){0, 0};
-	monster->hitbox.bot = (t_vect){50, 50};
+	monster->hitbox.top = (t_vect){5, 5};
+	monster->hitbox.bot = (t_vect){45, 45};
 	monster->f = flying_move;
 	monster->next = data->monster;
 	data->monster = monster;
