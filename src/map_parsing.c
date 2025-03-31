@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:16:48 by secros           ###   ########.fr       */
+/*   Updated: 2025/03/27 18:35:27 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ static int	check_condition(t_data *data, char *path)
 	char	*ext_check;
 	char	**map;
 
-	fd = open(path, O_RDONLY);
 	ext_check = ft_strnstr(path, ".ber", ft_strlen(path));
 	if (!ext_check || ext_check[4] != '\0')
 		return (5);
+	fd = open(path, O_RDONLY);
 	map = read_map(fd);
 	if (fd > 0)
 		close(fd);
