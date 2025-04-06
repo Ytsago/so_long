@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:07:57 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 16:17:17 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 14:28:59 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_map(char **map)
 
 	i = 1;
 	len = check_ex_row(map[0]);
-	if (len < 4 || len > 250 || ft_tablen(map) > 250)
+	if (len < 3 || len > 250 || ft_tablen(map) > 250)
 		return (1);
 	while (map[i] && map[i + 1])
 		if (len != check_line(map[i++]))
