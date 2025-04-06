@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 08:01:12 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 16:18:12 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:36:47 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,7 @@ int	confirm(t_data *data, int error)
 	{
 		if (data->load->img)
 			mlx_destroy_image(data->mlx_info.mlx, data->load->img);
-		mlx_destroy_window(data->mlx_info.mlx, data->mlx_info.win);
-		mlx_destroy_display(data->mlx_info.mlx);
-		free(data->mlx_info.mlx);
-		free_the_mallocs(data->map);
-		exit(error);
+		clean_exit(data, 1);
 	}
 	if (data->mlx_info.w_size->y == 265)
 		setting(data, data->load);

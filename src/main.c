@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:16:20 by secros            #+#    #+#             */
-/*   Updated: 2025/02/23 10:30:28 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:40:55 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,26 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_pict	load;
 
+	ft_bzero(&data, sizeof(t_data));
 	if (ac != 2 || map_parsing(&data, av[1]))
 	{
 		if (ac != 2)
-			write (2, "Error\nNot the right number of arguments", 40);
-		return (1);
+			write (2, "Error\nNot the right number of arguments\n", 40);
+		clean_exit(&data, 1);
 	}
 	load.img = NULL;
 	data.mlx_info.mlx = mlx_init();
 	if (!data.mlx_info.mlx)
 	{
-		write (2, "Error\n failed to create mlx_ptr", 31);
-		return (1);
+		write (2, "Error\nFailed to create mlx_ptr\n", 31);
+		clean_exit(&data, 1);
 	}
 	data.mlx_info.win = mlx_new_window(data.mlx_info.mlx, 400, 500, TITLE);
 	if (!data.mlx_info.win)
 	{
-		mlx_destroy_display(data.mlx_info.mlx);
-		free (data.mlx_info.mlx);
-		return ((void) write (2, "Error\nCan't create window", 25), 1);
+		write (2, "Error\nCan't create window\n", 25);
+		clean_exit(&data, 1);
 	}
-	data.engine.set = LOW;
 	loading_screen(&data, &load);
+	return (0);
 }

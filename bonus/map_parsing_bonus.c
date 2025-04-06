@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:38:55 by secros            #+#    #+#             */
-/*   Updated: 2025/03/27 17:02:01 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:27:29 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	map_parsing(t_data *data, char *path)
 		if (error == 4)
 			write(2, "Map has invalid pathing\n", 24);
 		if (error == 5)
-			write(2, "Map has invalid extention\n", 26);
+			write(2, "Map has invalid extension\n", 26);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:25:33 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 16:17:40 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:25:52 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ int	clean_exit(t_data *data, int error)
 	destroy_image(data->mlx_info.mlx, data->engine.screen.img);
 	destroy_image(data->mlx_info.mlx, data->sprite.enemy.img);
 	free_entity(data->monster);
-	mlx_destroy_display(data->mlx_info.mlx);
-	free(data->mlx_info.mlx);
+	if (data->mlx_info.mlx)
+	{
+		mlx_destroy_display(data->mlx_info.mlx);
+		free(data->mlx_info.mlx);
+	}
 	if (error)
-		write(2, "Error\nFailed to load game", 26);
+		write(2, "Error\nFailed to load game\n", 26);
 	exit(error);
 }

@@ -6,7 +6,7 @@
 /*   By: secros <secros@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:25:05 by secros            #+#    #+#             */
-/*   Updated: 2025/03/23 17:57:54 by secros           ###   ########.fr       */
+/*   Updated: 2025/04/06 13:34:11 by secros           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ int		set_player(t_data *data, int x, int y);
 //enemy
 void	*create_monster(t_data *data, t_vect pos);
 void	flying_move(t_data *data, t_entity *entity);
+void	free_entity(t_entity *entity);
 
 //input
 int		input(int key, void *param);
